@@ -1,7 +1,13 @@
 package nl.bprocare.alarmgateway.location;
 
-public class Location {
+import javax.persistence.Entity;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "alarmgateway")
+public class Location {
+	
+	@Id
 	private Long id;
 	private String street;
 	private String streetNumber;
