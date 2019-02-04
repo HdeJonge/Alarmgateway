@@ -7,14 +7,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class LocationController {
-	
+
 	@Autowired
 	private LocationService locationService;
 	
 	@GetMapping("/locations")
 	public String getLocations(Model model) {
-		locationService.getAllLocations();
+		model.addAttribute("locations",locationService.getAllLocations());
+		
 		return "locations";
+		
 	}
-
 }

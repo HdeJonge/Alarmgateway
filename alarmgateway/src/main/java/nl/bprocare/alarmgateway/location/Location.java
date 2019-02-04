@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "alarmgateway")
+@Table(name = "locations")
 public class Location {
 	
 	@Id
