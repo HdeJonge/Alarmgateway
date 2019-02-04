@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Locations</title>
+</head>
+<body>
+<table>
+	<tbody>
+		<tr th:each="location: ${locations}">
+			<td th:text="${location.street}"/>
+		</tr>
+	</tbody>
+</table>
+
+</body>
+	
+</html>
