@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Locations</title>
+<style>
+	input[type=text] {
+	  width: 100%;
+	  padding: 12px 20px;
+	  margin: 8px 0;
+	  box-sizing: border-box;
+	}
+</style>
+</head>
+<body>
+	<h1>Form</h1>
+	<form action="#" th:action="@{/saveLocation}" th:object="${location}" method="post">
+		<p>street:</p>
+		<input type="text" th:field="*{street}"/>
+		<p>streetnumber:</p>
+		<input type="text" th:field="*{streetNumber}"/>
+		<p>town</p>
+		<input type="text" th:field="*{town}"/>
+		<p>postal code</p>
+		<input type="text" th:field="*{postalCode}">
+		<br/>
+		<input type="submit" value="submit"/>
+	</form>
+
+</body>
+</html>

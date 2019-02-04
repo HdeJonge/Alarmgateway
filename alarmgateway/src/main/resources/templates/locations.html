@@ -9,9 +9,13 @@
 	<tbody>
 		<tr th:each="location: ${locations}">
 			<td th:text="${location.street}"/>
+			<td th:text="${location.streetNumber}"/>
+			<td th:text="${location.postalCode}"/>
+			<td th:text="${location.town}"/>
 		</tr>
 	</tbody>
 </table>
+<a href="/locationForm">Add Location</a>
 
 </body>
 	

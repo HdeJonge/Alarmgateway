@@ -8,6 +8,7 @@ import javax.persistence.*;
 public class Location {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String street;
 	private String streetNumber;
