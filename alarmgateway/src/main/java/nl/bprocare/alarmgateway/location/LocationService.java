@@ -19,6 +19,20 @@ public class LocationService {
 		locationRepository.save(location);
 		
 	}
+
+	public void deleteLocation(Long noteId) {
+		locationRepository.deleteById(noteId);
+		
+	}
+
+	public void updateLocation(Location location) {
+		locationRepository.save(location);
+	}
+
+	public Location getLocation(Long id) {
+		return locationRepository.findById(id).get();
+		
+	}
 	
 
 }

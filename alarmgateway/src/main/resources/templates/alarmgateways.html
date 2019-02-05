@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Locations</title>
+<title>Alarm gateways</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -12,18 +12,15 @@
 	<div class="container">
 		<table class="table">
 			<tbody>
-				<tr scope="row" th:each="location: ${locations}">
-					<td th:text="${location.street}"/>
-					<td th:text="${location.streetNumber}"/>
-					<td th:text="${location.postalCode}"/>
-					<td th:text="${location.town}"/>
-		            <td><a th:href="@{/edit/{id}(id=${location.id})}">Edit</a></td>
-					<td><a th:href="@{/delete/{id}(id=${location.id})}">Delete</a></td>
+				<tr th:each="gateway: ${gateways}">
+					<td th:text="${gateway.id}"/>
+					<td th:text="${gateway.MAC}"/>
+					<td th:text="${gateway.settingsProfile}"/>
 				</tr>
 			</tbody>
 		</table>
-		<a class="btn btn-primary" href="/add">Add Location</a>
+		<a class="btn btn-primary" href="/gateways/add">Add gateway</a>
 	</div>
+
 </body>
-	
 </html>

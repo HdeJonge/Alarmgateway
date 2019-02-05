@@ -67,5 +67,12 @@ public class Location {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
+	public String getLocation() {
+		return 
+				street + " " 
+				+ streetNumber +  " "
+				+ town + " "
+				+ postalCode + " "
+				+ phoneNumber;
+	}
 }
