@@ -20,4 +20,13 @@ public class AlarmgatewayService {
 		
 	}
 
+	public Alarmgateway getAlarmgateway(Long id) {
+		return alarmgatewayRepository.findById(id).get();
+	}
+
+	public void deleteAlarmgateway(Long id) {
+		alarmgatewayRepository.deleteById(id);
+		
+	}
+
 }

@@ -16,10 +16,12 @@
 					<td th:text="${gateway.id}"/>
 					<td th:text="${gateway.MAC}"/>
 					<td th:text="${gateway.settingsProfile}"/>
+					<td><a th:href="@{editGateway/{id}(id=${gateway.id})}">Edit</a></td>
+					<td><a th:href="@{deleteGateway/{id}(id=${gateway.id})}">Delete</a></td>
 				</tr>
 			</tbody>
 		</table>
-		<a class="btn btn-primary" href="/gateways/add">Add gateway</a>
+		<a class="btn btn-primary" href="/addGateway">Add gateway</a>
 	</div>
 
 </body>

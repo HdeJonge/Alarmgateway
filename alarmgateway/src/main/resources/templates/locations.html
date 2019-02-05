@@ -17,12 +17,12 @@
 					<td th:text="${location.streetNumber}"/>
 					<td th:text="${location.postalCode}"/>
 					<td th:text="${location.town}"/>
-		            <td><a th:href="@{/edit/{id}(id=${location.id})}">Edit</a></td>
-					<td><a th:href="@{/delete/{id}(id=${location.id})}">Delete</a></td>
+		            <td><a th:href="@{/editLocation/{id}(id=${location.id})}">Edit</a></td>
+					<td><a th:href="@{/deleteLocation/{id}(id=${location.id})}">Delete</a></td>
 				</tr>
 			</tbody>
 		</table>
-		<a class="btn btn-primary" href="/add">Add Location</a>
+		<a class="btn btn-primary" href="/addLocation">Add Location</a>
 	</div>
 </body>
 	
