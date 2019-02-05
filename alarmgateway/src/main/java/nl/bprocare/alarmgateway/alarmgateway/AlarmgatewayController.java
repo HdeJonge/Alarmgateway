@@ -20,36 +20,36 @@ public class AlarmgatewayController {
 	@Autowired
 	private AlarmgatewayService alarmgatewayService;
 	
-	@GetMapping("/gateways")
+	@GetMapping("gateways")
 	public String getAllAlarmgateways(Model model) {
 		model.addAttribute("gateways", alarmgatewayService.getAllAlarmgateways());
 		return "alarmgateways";
 	}
 	
-	@GetMapping("/addGateway")
+	@GetMapping("addGateway")
 	public String addGateway(Model model) {
 		model.addAttribute("gateway", new Alarmgateway());
 		model.addAttribute("locations", locationService.getAllLocations());
 		return "addAlarmgateway";
 	}
-	@PostMapping("/saveGateway")
+	@PostMapping("saveGateway")
 	public String saveGateway(@ModelAttribute Alarmgateway alarmgateway, Model model) {
 		alarmgatewayService.saveAlarmgateway(alarmgateway);
 		model.addAttribute("gateways", alarmgatewayService.getAllAlarmgateways());
 
 		return "alarmgateways";
 	}
-	@GetMapping("/editGateway/{id}")
+	@GetMapping("editGateway/{id}")
 	public String editGateways(@PathVariable(value="id")Long id, Model model){
 		model.addAttribute("gateway",alarmgatewayService.getAlarmgateway(id));
 		model.addAttribute("locations", locationService.getAllLocations());
 		return "editAlarmgateway";
 	}
 	
-	@GetMapping("/deleteGateway/{id}")
+	@GetMapping("deleteGateway/{id}")
 	public String deleteGateway(@PathVariable(value="id")Long id, Model model){
 		alarmgatewayService.deleteAlarmgateway(id);
 		model.addAttribute("gateways", alarmgatewayService.getAllAlarmgateways());
-		return "alarmgateways";
+		return "redirect:/gateways";
 	}
 }

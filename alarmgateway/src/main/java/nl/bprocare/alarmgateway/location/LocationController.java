@@ -17,19 +17,19 @@ public class LocationController {
 	@Autowired
 	private LocationService locationService;
 	
-	@GetMapping("/locations")
+	@GetMapping("locations")
 	public String getLocations(Model model) {
 		model.addAttribute("locations",locationService.getAllLocations());
 		return "locations";
 	}
 	
-	@GetMapping("/addLocation")
+	@GetMapping("addLocation")
 	public String addLocation(Model model) {
 		model.addAttribute("location", new Location());
 		return "addLocation";
 		
 	}
-	@PostMapping("/saveLocation")
+	@PostMapping("saveLocation")
 	public String saveLocation(@ModelAttribute Location location, Model model) {
 		
 		locationService.saveLocation(location);
@@ -37,23 +37,23 @@ public class LocationController {
 		return "locations";
 	}
 	
-	@GetMapping("/editLocation/{id}")
+	@GetMapping("editLocation/{id}")
 	public String editLocation(@PathVariable (value="id")Long id, Model model) {
 		model.addAttribute("location", locationService.getLocation(id));
 		return "editLocation";
 		
 	}
-	@PostMapping("/updateLocation/{id}")
+	@PostMapping("updateLocation/{id}")
 	public String updateLocation(@PathVariable (value="id")Long id, @Valid Location location, Model model) {
 		System.out.println(location);
 		locationService.updateLocation(location);
 		model.addAttribute("locations",locationService.getAllLocations());
 		return "locations";
 	}
-	@GetMapping("/deleteLocation/{id}")
+	@GetMapping("deleteLocation/{id}")
 	public String deleteLocation(@PathVariable(value="id") Long noteId, Model model) {
 		locationService.deleteLocation(noteId);
 		model.addAttribute("locations",locationService.getAllLocations());
-		return "locations";
+		return "redirect:/locations";
 	}
 }
