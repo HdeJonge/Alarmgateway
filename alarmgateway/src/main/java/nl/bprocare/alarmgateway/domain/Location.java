@@ -1,4 +1,4 @@
-package nl.bprocare.alarmgateway.location;
+package nl.bprocare.alarmgateway.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.*;

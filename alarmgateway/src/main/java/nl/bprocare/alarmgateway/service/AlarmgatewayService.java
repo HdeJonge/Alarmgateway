@@ -1,9 +1,12 @@
-package nl.bprocare.alarmgateway.alarmgateway;
+package nl.bprocare.alarmgateway.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import nl.bprocare.alarmgateway.domain.Alarmgateway;
+import nl.bprocare.alarmgateway.repository.AlarmgatewayRepository;
 
 @Service
 public class AlarmgatewayService {

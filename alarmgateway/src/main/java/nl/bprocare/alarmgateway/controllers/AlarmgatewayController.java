@@ -1,4 +1,4 @@
-package nl.bprocare.alarmgateway.alarmgateway;
+package nl.bprocare.alarmgateway.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 
-import nl.bprocare.alarmgateway.location.LocationService;
+import nl.bprocare.alarmgateway.domain.Alarmgateway;
+import nl.bprocare.alarmgateway.service.AlarmgatewayService;
+import nl.bprocare.alarmgateway.service.LocationService;
 
 @Controller
 public class AlarmgatewayController {

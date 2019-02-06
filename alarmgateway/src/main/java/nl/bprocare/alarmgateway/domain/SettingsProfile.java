@@ -1,4 +1,4 @@
-package nl.bprocare.alarmgateway.alarmgateway;
+package nl.bprocare.alarmgateway.domain;
 
 public enum SettingsProfile {
 	A (1),

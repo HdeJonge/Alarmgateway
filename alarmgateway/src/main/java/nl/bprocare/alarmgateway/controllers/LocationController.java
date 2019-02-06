@@ -1,4 +1,4 @@
-package nl.bprocare.alarmgateway.location;
+package nl.bprocare.alarmgateway.controllers;
 
 import javax.validation.Valid;
 
@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import nl.bprocare.alarmgateway.domain.Location;
+import nl.bprocare.alarmgateway.service.LocationService;
 
 @Controller
 public class LocationController {

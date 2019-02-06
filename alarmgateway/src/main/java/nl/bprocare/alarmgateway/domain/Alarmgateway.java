@@ -1,4 +1,4 @@
-package nl.bprocare.alarmgateway.alarmgateway;
+package nl.bprocare.alarmgateway.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,8 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import nl.bprocare.alarmgateway.location.Location;
 
 @Entity
 @Table(name="alarm_gateway")
