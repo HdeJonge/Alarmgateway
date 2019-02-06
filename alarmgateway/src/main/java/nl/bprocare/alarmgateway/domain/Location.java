@@ -1,6 +1,9 @@
 package nl.bprocare.alarmgateway.domain;
 
 import javax.persistence.Entity;
+
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -16,6 +19,28 @@ public class Location {
 	private String postalCode;
 	private String phoneNumber;
 	
+	 @ManyToMany(cascade=CascadeType.ALL)
+	    @JoinTable(
+	            name = "location_label", 
+	            joinColumns = { @JoinColumn(name = "location_id") }, 
+	            inverseJoinColumns = { @JoinColumn(name = "label_id") }
+	        )
+	private List<Label> labelList;
+
+	public List<Label> getLabelList() {
+		return labelList;
+	}
+
+	public void setLabelList(List<Label> labels) {
+		this.labelList = labels;
+	}
+
+	public void addLabel(Label label) {
+		this.labelList.add(label);
+	}
+	public void removeLabel(Label label) {
+		this.labelList.remove(label);
+	}
 	public Location() {
 		
 	}

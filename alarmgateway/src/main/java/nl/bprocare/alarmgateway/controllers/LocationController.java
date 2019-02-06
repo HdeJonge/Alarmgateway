@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import nl.bprocare.alarmgateway.domain.Location;
+import nl.bprocare.alarmgateway.service.LabelService;
 import nl.bprocare.alarmgateway.service.LocationService;
 
 @Controller
@@ -19,6 +20,10 @@ public class LocationController {
 
 	@Autowired
 	private LocationService locationService;
+	
+
+	@Autowired
+	private LabelService labelService;
 	
 	@GetMapping("locations")
 	public String getLocations(Model model) {
@@ -29,6 +34,7 @@ public class LocationController {
 	@GetMapping("addLocation")
 	public String addLocation(Model model) {
 		model.addAttribute("location", new Location());
+		model.addAttribute("labels", labelService.getAllLabels());
 		return "addLocation";
 		
 	}
@@ -43,7 +49,8 @@ public class LocationController {
 	@GetMapping("editLocation/{id}")
 	public String editLocation(@PathVariable (value="id")Long id, Model model) {
 		model.addAttribute("location", locationService.getLocation(id));
-		return "redirect:/locations";
+		model.addAttribute("labels", labelService.getAllLabels());
+		return "editLocation";
 		
 	}
 	@PostMapping("updateLocation/{id}")

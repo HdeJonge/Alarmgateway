@@ -20,12 +20,10 @@ public class LocationService {
 
 	public void saveLocation(Location location) {
 		locationRepository.save(location);
-		
 	}
 
-	public void deleteLocation(Long noteId) {
-		locationRepository.deleteById(noteId);
-		
+	public void deleteLocation(Long locationId) {
+		locationRepository.deleteById(locationId);
 	}
 
 	public void updateLocation(Location location) {
@@ -36,6 +34,4 @@ public class LocationService {
 		return locationRepository.findById(id).get();
 		
 	}
-	
-
 }

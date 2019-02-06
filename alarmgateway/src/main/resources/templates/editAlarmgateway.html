@@ -21,7 +21,7 @@
 			<div class="form-group">
 				<label>profile:</label> 
 				<select th:field="*{settingsProfile}" class="form-control">
-					<option th:each="profile:${T(nl.bprocare.alarmgateway.alarmgateway.SettingsProfile).values()}" 
+					<option th:each="profile:${T(nl.bprocare.alarmgateway.domain.SettingsProfile).values()}" 
 					th:value="${profile}" 
 					th:utext="${profile}">
 				</select>
