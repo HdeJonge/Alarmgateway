@@ -40,7 +40,7 @@ public class LocationController {
 	@GetMapping("editLocation/{id}")
 	public String editLocation(@PathVariable (value="id")Long id, Model model) {
 		model.addAttribute("location", locationService.getLocation(id));
-		return "editLocation";
+		return "redirect:/locations";
 		
 	}
 	@PostMapping("updateLocation/{id}")
@@ -48,7 +48,7 @@ public class LocationController {
 		System.out.println(location);
 		locationService.updateLocation(location);
 		model.addAttribute("locations",locationService.getAllLocations());
-		return "locations";
+		return "redirect:/locations";
 	}
 	@GetMapping("deleteLocation/{id}")
 	public String deleteLocation(@PathVariable(value="id") Long noteId, Model model) {
