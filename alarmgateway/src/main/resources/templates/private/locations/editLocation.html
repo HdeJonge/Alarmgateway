@@ -13,7 +13,7 @@
 <body>
 	<div class="container">
 		<h1>edit location</h1>
-		<form action="#" th:action="@{/updateLocation/{id}(id=${location.id})}" th:object="${location}" method="post">
+		<form action="#" th:action="@{/private/locations/updateLocation/{id}(id=${location.id})}" th:object="${location}" method="post">
 
 			<div class="form-group">
 				<label>street:</label> <input type="text" class="form-control" th:field="*{street}" />

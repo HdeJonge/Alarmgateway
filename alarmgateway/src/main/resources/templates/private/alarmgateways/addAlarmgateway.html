@@ -13,10 +13,10 @@
 	<div class="container">
 		<h1>add gateway</h1>
 
-		<form action="#" th:action="@{/saveGateway}" th:object="${gateway}" method="post">
+		<form action="#" th:action="@{saveGateway}" th:object="${gateway}" method="post">
 			<div class="form-group">
 				<label>MAC:</label> 
-				<input type="text" id="macAddress" class="form-control" th:field="*{MAC}" pattern="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"/>
+				<input type="text" id="macAddress" class="form-control" th:field="*{mac}" pattern="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"/>
 			</div>
 			<div class="form-group">
 				<label>profile:</label> 

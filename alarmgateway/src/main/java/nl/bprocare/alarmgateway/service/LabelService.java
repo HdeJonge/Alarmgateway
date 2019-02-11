@@ -11,7 +11,7 @@ import nl.bprocare.alarmgateway.repository.LabelRepository;
 @Service
 public class LabelService {
 	@Autowired
-	LabelRepository labelRepository;
+	private LabelRepository labelRepository;
 	
 	public List<Label> getAllLabels(){
 		return labelRepository.findAll();

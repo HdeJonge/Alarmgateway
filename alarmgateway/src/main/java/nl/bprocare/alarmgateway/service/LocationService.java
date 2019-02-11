@@ -12,7 +12,7 @@ import nl.bprocare.alarmgateway.repository.LocationRepository;
 public class LocationService {
 	
 	@Autowired
-	LocationRepository locationRepository;
+	private LocationRepository locationRepository;
 	
 	public List<Location> getAllLocations() {
 		return locationRepository.findAll();

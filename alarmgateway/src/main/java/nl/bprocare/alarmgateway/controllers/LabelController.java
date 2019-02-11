@@ -16,6 +16,6 @@ public class LabelController {
 	@GetMapping("labels")
 	public String getLocations(Model model) {
 		model.addAttribute("labels", labelService.getAllLabels());
-		return "labels";
+		return "user/labels";
 	}
 }

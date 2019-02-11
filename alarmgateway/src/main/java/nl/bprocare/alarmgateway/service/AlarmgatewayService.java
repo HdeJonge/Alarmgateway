@@ -12,7 +12,7 @@ import nl.bprocare.alarmgateway.repository.AlarmgatewayRepository;
 public class AlarmgatewayService {
 	
 	@Autowired
-	AlarmgatewayRepository alarmgatewayRepository;
+	private AlarmgatewayRepository alarmgatewayRepository;
 	
 	public List<Alarmgateway> getAllAlarmgateways(){
 		return alarmgatewayRepository.findAll();

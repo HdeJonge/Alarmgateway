@@ -13,7 +13,7 @@ public class Alarmgateway {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	private String MAC;
+	private String mac;
 	private SettingsProfile settingsProfile;
 	
 	@OneToOne
@@ -31,11 +31,11 @@ public class Alarmgateway {
 		this.id = id;
 	}
 
-	public String getMAC() {
-		return MAC;
+	public String getMac() {
+		return mac;
 	}
-	public void setMAC(String mAC) {
-		MAC = mAC;
+	public void setMac(String mac) {
+		this.mac = mac;
 	}
 	public SettingsProfile getSettingsProfile() {
 		return settingsProfile;
@@ -43,6 +43,7 @@ public class Alarmgateway {
 	public void setSettingsProfile(SettingsProfile settingsProfile) {
 		this.settingsProfile = settingsProfile;
 	}
+	
 	public Location getLocation() {
 		return location;
 	}

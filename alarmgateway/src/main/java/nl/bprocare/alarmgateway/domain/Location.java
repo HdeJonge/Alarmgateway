@@ -19,7 +19,7 @@ public class Location {
 	private String postalCode;
 	private String phoneNumber;
 	
-	 @ManyToMany(cascade=CascadeType.ALL)
+	 @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH})
 	    @JoinTable(
 	            name = "location_label", 
 	            joinColumns = { @JoinColumn(name = "location_id") }, 

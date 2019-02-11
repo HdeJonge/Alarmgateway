@@ -15,7 +15,7 @@
 <body>
 	<div class="container">
 		<h1>add location</h1>
-		<form action="#" th:action="@{/saveLocation}" th:object="${location}" method="post">
+		<form action="#" th:action="@{saveLocation}" th:object="${location}" method="post">
 			<div class="form-group">
 				<label>street:</label> <input type="text" class="form-control" th:field="*{street}" required />
 			</div>
