@@ -3,43 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Locations</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-	<script>
-$(document).ready(function() {
-    $('#example').DataTable();
-} );
-	</script>
+<!--/*/ <th:block th:include="/fragments/scripts :: head"></th:block> /*/-->
 </head>
 <body>
-		<table id="example" style="width: 100%">
-		        <thead>
-            <tr>
-                <th>street</th>
-                <th>street number</th>
-                <th>postal code</th>
-                <th>town</th>
-                <th>edit</th>
-                <th>delete</th>
-            </tr>
-			<tbody>
-				<tr th:each="location: ${locations}">
-					<td th:text="${location.street}" />
-					<td th:text="${location.streetNumber}" />
-					<td th:text="${location.postalCode}" />
-					<td th:text="${location.town}" />
-					<td><a th:href="@{editLocation/{id}(id=${location.id})}" class="btn btn-secondary">Edit</a></td>
-					<td><a th:href="@{deleteLocation/{id}(id=${location.id})}" class="btn btn-danger">Delete</a></td>
-				</tr>
-			</tbody>
-		</table>
-		<a class="btn btn-primary" href="/private/locations/addLocation">Add Location</a> 
-		<a class="btn btn-primary" href="/private/alarmgateways/alarmgateways">gateways</a>
-
+	<table id="example" style="width: 100%">
+		<thead>
+			<tr>
+				<th>street</th>
+				<th>street number</th>
+				<th>postal code</th>
+				<th>town</th>
+				<th>edit</th>
+				<th>delete</th>
+			</tr>
+		<tbody>
+			<tr th:each="location: ${locations}">
+				<td th:text="${location.street}" />
+				<td th:text="${location.streetNumber}" />
+				<td th:text="${location.postalCode}" />
+				<td th:text="${location.town}" />
+				<td><a th:href="@{editLocation/{id}(id=${location.id})}" class="btn btn-secondary">Edit</a></td>
+				<td><a th:href="@{deleteLocation/{id}(id=${location.id})}" class="btn btn-danger">Delete</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<a class="btn btn-primary" href="/private/locations/addLocation">Add Location</a>
+	<a class="btn btn-primary" href="/private/alarmgateways/alarmgateways">gateways</a>
+	<script>
+		$(document).ready(function() {
+			$('#example').DataTable();
+		});
+	</script>
 </body>
 
 </html>
