@@ -39,13 +39,13 @@
 <body>
 	<div class="wrapper" th:fragment="wrapper-fragment">
 		<!-- Sidebar -->
-		<nav id="sidebar">
+		<nav id="sidebar" th:fragment="sidebar-fragment">
 			<div class="sidebar-header">
 				<h3>Menu</h3>
 			</div>
 			<ul class="list-unstyled components">
-				<li th:classappend="${module == 'alarmgateways' ? 'active' : ''}"><a href="#">alarm gateways</a></li>
-				<li th:classappend="${module == 'locations' ? 'active' : ''}"><a href="#">locations</a></li>
+				<li th:classappend="${module == 'alarmgateways' ? 'active' : ''}"><a href="/private/alarmgateways/alarmgateways">alarm gateways</a></li>
+				<li th:classappend="${module == 'locations' ? 'active' : ''}"><a href="/private/locations/locations">locations</a></li>
 				<li th:classappend="${module == 'labelss' ? 'active' : ''}"><a href="#">labels</a></li>
 				<li class="active"><a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
 					<ul class="collapse list-unstyled" id="homeSubmenu">
@@ -57,7 +57,7 @@
 		</nav>
 
 		<!-- Page Content Holder -->
-		<div id="content">
+		<div id="content" th:fragment="content-fragment">
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div class="container-fluid">
 					<button type="button" id="sidebarCollapse" class="btn btn-info">
