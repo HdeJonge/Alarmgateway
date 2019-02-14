@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,14 +24,17 @@ public class LocationController {
 	@Autowired
 	private LocationService locationService;
 	
-
 	@Autowired
 	private LabelService labelService;
 	
+	@GetMapping("restlocations")
+	public String getRestLocations(Model model) {
+		return "private/locations/restLocations";
+	}
 	@GetMapping("locations")
 	public String getLocations(Model model) {
 		model.addAttribute("locations",locationService.getAllLocations());
-		return "private/locations/locations";
+		return "private/locations/restlocations";
 	}
 	
 	@GetMapping("addLocation")
@@ -41,10 +45,11 @@ public class LocationController {
 		
 	}
 	@PostMapping("saveLocation")
-	public String saveLocation(@ModelAttribute Location location, Model model) {
-		
+	public String saveLocation(@Valid Location location, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "private/locations/addLocation";
+        }
 		locationService.saveLocation(location);
-		model.addAttribute("locations",locationService.getAllLocations());
 		return "redirect:/private/locations/locations";
 	}
 	
@@ -58,13 +63,13 @@ public class LocationController {
 	@PostMapping("updateLocation/{id}")
 	public String updateLocation(@PathVariable (value="id")Long id, @Valid Location location, Model model) {
 		locationService.updateLocation(location);
-		model.addAttribute("locations",locationService.getAllLocations());
 		return "redirect:/private/locations/locations";
 	}
+	
 	@GetMapping("deleteLocation/{id}")
 	public String deleteLocation(@PathVariable(value="id") Long noteId, Model model) {
 		locationService.deleteLocation(noteId);
 		model.addAttribute("locations",locationService.getAllLocations());
-		return "redirect:/private/locations/locations";
+		return "redirect:/private/locations/restlocations";
 	}
 }

@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="alarm_gateway")
@@ -14,6 +15,7 @@ public class Alarmgateway {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String mac;
+	@NotEmpty
 	private SettingsProfile settingsProfile;
 	
 	@OneToOne

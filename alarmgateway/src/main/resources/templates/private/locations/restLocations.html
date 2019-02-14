@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Alarm gateways</title>
+<title>Locations</title>
 <!--/*/ <th:block th:include="/fragments/scripts :: head"></th:block> /*/-->
 </head>
 <body>
@@ -12,39 +12,49 @@
 		</nav>
 		<div id="content">
 			<!--/*/ <th:block th:include="/fragments/sidebar :: content-fragment"></th:block> /*/-->
-			<table id="gateways" class="table table-striped table-bordered" style="width: 100%">
+			<table id="locations" class="table table-striped table-bordered" style="width: 100%">
 				<thead>
-					<tr>
-
-						<th>MAC</th>
-						<th>profile</th>
-						<th>edit/delete</th>
-
-					</tr>
+			<tr>
+				<th>street</th>
+				<th>street number</th>
+				<th>postal code</th>
+				<th>town</th>
+				<th>edit</th>
+				<th>delete</th>
+			</tr>
 				</thead>
 			</table>
-			<a class="btn btn-primary" href="/private/alarmgateways/addGateway">Add gateway</a>
+			<a class="btn btn-primary" href="/private/locations/addLocation">Add location</a>
 		</div>
 	</div>
 	<script>
-		$('table#gateways').DataTable(
+		$('table#locations')
+				.DataTable(
 						{
-							ajax : '/restgateways',
+							ajax : '/restlocations',
 							serverSide : true,
 							columns : [
 
 									{
-										data : 'mac'
+										data : 'street'
 									},
 									{
-										data : 'settingsProfile'
+										data : 'streetNumber'
+									},
+
+									{
+										data : 'postalCode'
+									},
+
+									{
+										data : 'town'
 									},
 									{
 										name : 'id',
 										data : 'id',
 										searchable : false,
 										mRender : function(data, type, full) {
-											return '<a class="btn btn-primary" href="/private/alarmgateways/editGateway/' + data + '"><span class="glyphicon glyphicon-remove"></span>edit</a> <a class="btn btn-primary" href="/private/alarmgateways/deleteGateway/' + data + '">delete</a>';
+											return '<a class="btn btn-primary" href="/private/locations/editLocation/' + data + '">edit</a> <a class="btn btn-primary" href="/private/locations/deleteLocation/' + data + '">delete</a>';
 										}
 									} ]
 						});

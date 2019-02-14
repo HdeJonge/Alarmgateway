@@ -14,20 +14,20 @@
 				<th>MAC</th>
 				<th>profile</th>
 				<th>edit</th>
-				<th>delte</th>
+				<th>delete</th>
 			</tr>
 			<tbody>
 				<tr th:each="gateway: ${gateways}">
 					<td th:text="${gateway.id}" />
 					<td th:text="${gateway.mac}" />
 					<td th:text="${gateway.settingsProfile}" />
-					<td><a th:href="@{editGateway/{id}(id=${gateway.id})}" class="btn btn-secondary">Edit</a></td>
-					<td><a th:href="@{deleteGateway/{id}(id=${gateway.id})}" class="btn btn-danger">Delete</a></td>
+					<td><a th:href="@{editGateway/{id}(id=${gateway.id})}" class="btn btn-secondary"><i class="glyphicon glyphicon-edit"></i></a></td>
+					<td><a th:href="@{deleteGateway/{id}(id=${gateway.id})}" class="btn btn-danger"><i class="glyphicon glyphicon-remove-sign"></i></a></td>
 				</tr>
 			</tbody>
 		</table>
 		<a class="btn btn-primary" href="/private/alarmgateways/addGateway">Add gateway</a> <a class="btn btn-primary"
-			href="/private/locations/locations">locations</a>
+			href="/locations/locations">locations</a>
 	</div>
 	<script>
 		$(document).ready(function() {

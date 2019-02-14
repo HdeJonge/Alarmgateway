@@ -34,4 +34,7 @@ public class LocationService {
 		return locationRepository.findById(id).get();
 		
 	}
+	public List<Location> getLocationByPostalCodeAndStreetNumber(String postalCode, String streetNumber){
+		return locationRepository.findByPostalCodeAndStreetNumber(postalCode, streetNumber);
+	}
 }

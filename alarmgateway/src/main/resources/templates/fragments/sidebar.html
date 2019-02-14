@@ -44,9 +44,9 @@
 				<h3>Menu</h3>
 			</div>
 			<ul class="list-unstyled components">
-				<li th:classappend="${module == 'alarmgateways' ? 'active' : ''}"><a href="/private/alarmgateways/alarmgateways">alarm gateways</a></li>
-				<li th:classappend="${module == 'locations' ? 'active' : ''}"><a href="/private/locations/locations">locations</a></li>
-				<li th:classappend="${module == 'labelss' ? 'active' : ''}"><a href="#">labels</a></li>
+				<li th:classappend="${module == 'alarmgateways' ? 'active' : ''}"><a href="/private/alarmgateways/restgateways">alarm gateways</a></li>
+				<li th:classappend="${module == 'locations' ? 'active' : ''}"><a href="/private/locations/restlocations">locations</a></li>
+				<li th:classappend="${module == 'labelss' ? 'active' : ''}"><a href="/private/labels">labels</a></li>
 				<li class="active"><a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
 					<ul class="collapse list-unstyled" id="homeSubmenu">
 						<li><a href="#">Home 1</a></li>

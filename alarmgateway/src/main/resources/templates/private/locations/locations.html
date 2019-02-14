@@ -13,8 +13,7 @@
 				<th>street number</th>
 				<th>postal code</th>
 				<th>town</th>
-				<th>edit</th>
-				<th>delete</th>
+				<th>edit/delete</th>
 			</tr>
 		<tbody>
 			<tr th:each="location: ${locations}">
@@ -27,8 +26,8 @@
 			</tr>
 		</tbody>
 	</table>
-	<a class="btn btn-primary" href="/private/locations/addLocation">Add Location</a>
-	<a class="btn btn-primary" href="/private/alarmgateways/alarmgateways">gateways</a>
+	<a class="btn btn-primary" href="/locations/addLocation">Add Location</a>
+	<a class="btn btn-primary" href="/alarmgateways/alarmgateways">gateways</a>
 	<script>
 		$(document).ready(function() {
 			$('#example').DataTable();

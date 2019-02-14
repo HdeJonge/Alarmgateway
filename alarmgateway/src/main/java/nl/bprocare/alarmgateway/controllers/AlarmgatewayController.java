@@ -36,7 +36,7 @@ public class AlarmgatewayController {
 	@GetMapping("alarmgateways")
 	public String getAllAlarmgateways(Model model) {
 		model.addAttribute("gateways", alarmgatewayService.getAllAlarmgateways());
-		return "private/alarmgateways/alarmgateways";
+		return "private/alarmgateways/restgateways";
 	}
 	
 	@GetMapping("addGateway")
@@ -48,9 +48,7 @@ public class AlarmgatewayController {
 	@PostMapping("saveGateway")
 	public String saveGateway(@ModelAttribute Alarmgateway alarmgateway, Model model) {
 		alarmgatewayService.saveAlarmgateway(alarmgateway);
-		model.addAttribute("gateways", alarmgatewayService.getAllAlarmgateways());
-
-		return "redirect:/private/alarmgateways/alarmgateways";
+		return "redirect:/private/alarmgateways/restgateways";
 	}
 	@GetMapping("editGateway/{id}")
 	public String editGateways(@PathVariable(value="id")Long id, Model model){
@@ -61,14 +59,13 @@ public class AlarmgatewayController {
 	@PostMapping("updateGateway/{id}")
 	public String updateGateway(@PathVariable (value="id")Long id, @Valid Alarmgateway alarmgateway, Model model) {
 		alarmgatewayService.saveAlarmgateway(alarmgateway);
-		model.addAttribute("gateway",alarmgatewayService.getAllAlarmgateways());
-		return "redirect:/private/alarmgateways/alarmgateways";
+		return "redirect:/private/alarmgateways/restgateways";
 	}
 	
 	@GetMapping("deleteGateway/{id}")
 	public String deleteGateway(@PathVariable(value="id")Long id, Model model){
 		alarmgatewayService.deleteAlarmgateway(id);
 		model.addAttribute("gateways", alarmgatewayService.getAllAlarmgateways());
-		return "redirect:/private/alarmgateways/alarmgateways";
+		return "redirect:/private/alarmgateways/restgateways";
 	}
 }
