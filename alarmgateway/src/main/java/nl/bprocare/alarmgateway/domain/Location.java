@@ -11,12 +11,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "locations")
-/*
+
 @UniqueLocation(
 		postalCode = "postalCode",
 		streetNumber = "streetNumber"
 		)
-		*/
+		
 public class Location {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

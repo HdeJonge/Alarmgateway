@@ -6,6 +6,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import nl.bprocare.alarmgateway.domain.Location;
 import nl.bprocare.alarmgateway.service.LocationService;
@@ -15,10 +16,10 @@ public class UniqueLocationValidator implements ConstraintValidator<UniqueLocati
 	private String postalCode;
 	private String streetNumber;
 	
+	@Autowired
 	private LocationService service;
 
-	public UniqueLocationValidator(LocationService service) {
-		this.service = service;
+	public UniqueLocationValidator() {
 	}
 	
 	@Override
