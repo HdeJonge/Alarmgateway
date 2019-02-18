@@ -46,7 +46,7 @@
 						<option th:each="label:${labels}" th:value="${label.id}" th:utext="${label.description}">
 					</select>
 				</div>
-				<h2 class="help-block" th:errors="${location}"></h2> 
+				<p class="help-block" th:errors="${location}"></p> 
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
 		</div>
