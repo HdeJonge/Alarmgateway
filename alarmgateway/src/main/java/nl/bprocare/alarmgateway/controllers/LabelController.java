@@ -40,11 +40,11 @@ public class LabelController {
 	}
 	@GetMapping("addLabel")
 	public String addLabel(Model model) {
-		model.addAttribute("label", new LabelDto());
+		model.addAttribute("label", new Label());
 		return "private/labels/addLabel";
 	}
 	@PostMapping("saveLabel")
-	public String saveLabel(@ModelAttribute LabelDto label, Model model) {
+	public String saveLabel(@ModelAttribute Label label, Model model) {
 		/*mapping*/
 		LabelDto labelDto = mapper.map(label, LabelDto.class);
 		labelService.saveLabel(labelDto);
@@ -60,10 +60,10 @@ public class LabelController {
 		return "private/labels/editLabel";
 	}
 	@PostMapping("updateLabel/{id}")
-	public String updateLabel(@ModelAttribute LabelDto label) {
+	public String updateLabel(@ModelAttribute Label label) {
 		/*mapping*/
 		LabelDto labelDto = mapper.map(label, LabelDto.class);
-		labelService.saveLabel(label);
+		labelService.saveLabel(labelDto);
 		return "redirect:/private/labels";
 	}
 	@GetMapping("deleteLabel/{id}")
