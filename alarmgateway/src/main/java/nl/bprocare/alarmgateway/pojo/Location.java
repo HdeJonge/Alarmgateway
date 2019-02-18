@@ -1,16 +1,11 @@
-package nl.bprocare.alarmgateway.domain;
+package nl.bprocare.alarmgateway.pojo;
 
-import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import constraints.UniqueLocation;
 
 import java.util.List;
-import javax.persistence.*;
-
-@Entity
-@Table(name = "locations")
 
 @UniqueLocation(
 		postalCode = "postalCode",
@@ -18,8 +13,6 @@ import javax.persistence.*;
 		)
 		
 public class Location {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	@NotNull
 	@NotEmpty
@@ -36,13 +29,7 @@ public class Location {
 	@NotNull
 	@NotEmpty
 	private String phoneNumber;
-	
-	 @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH})
-	    @JoinTable(
-	            name = "location_label", 
-	            joinColumns = { @JoinColumn(name = "location_id") }, 
-	            inverseJoinColumns = { @JoinColumn(name = "label_id") }
-	        )
+
 	private List<Label> labelList;
 
 	public List<Label> getLabelList() {

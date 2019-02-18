@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import nl.bprocare.alarmgateway.domain.Alarmgateway;
+import nl.bprocare.alarmgateway.dto.AlarmgatewayDto;
+import nl.bprocare.alarmgateway.pojo.Alarmgateway;
 import nl.bprocare.alarmgateway.repository.AlarmgatewayDataTableRepository;
 
 @RestController
@@ -20,7 +21,7 @@ public class AlarmgatewayRestController {
 	private AlarmgatewayDataTableRepository repository;
 	
 	@GetMapping("/restgateways")
-	public DataTablesOutput<Alarmgateway> getAlarmgateways(@Valid DataTablesInput input){
+	public DataTablesOutput<AlarmgatewayDto> getAlarmgateways(@Valid DataTablesInput input){
 		return repository.findAll(input);
 	}
 

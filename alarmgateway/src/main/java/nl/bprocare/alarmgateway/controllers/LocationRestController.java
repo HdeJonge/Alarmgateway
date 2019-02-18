@@ -8,7 +8,7 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import nl.bprocare.alarmgateway.domain.Location;
+import nl.bprocare.alarmgateway.dto.LocationDto;
 import nl.bprocare.alarmgateway.repository.LocationDataTableRepository;
 
 @RestController
@@ -17,7 +17,7 @@ public class LocationRestController {
 	private LocationDataTableRepository repository;
 	
 	@GetMapping("/restlocations")
-	public DataTablesOutput<Location> getLocations(@Valid DataTablesInput input){
+	public DataTablesOutput<LocationDto> getLocations(@Valid DataTablesInput input){
 		return repository.findAll(input);
 	}
 	

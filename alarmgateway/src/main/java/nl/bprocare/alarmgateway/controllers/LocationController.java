@@ -1,5 +1,7 @@
 package nl.bprocare.alarmgateway.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import nl.bprocare.alarmgateway.domain.Location;
+import ma.glasnost.orika.MapperFacade;
+import ma.glasnost.orika.MapperFactory;
+import ma.glasnost.orika.impl.DefaultMapperFactory;
+import nl.bprocare.alarmgateway.dto.LabelDto;
+import nl.bprocare.alarmgateway.dto.LocationDto;
+import nl.bprocare.alarmgateway.pojo.Label;
+import nl.bprocare.alarmgateway.pojo.Location;
 import nl.bprocare.alarmgateway.service.LabelService;
 import nl.bprocare.alarmgateway.service.LocationService;
 
@@ -21,11 +29,20 @@ import nl.bprocare.alarmgateway.service.LocationService;
 @RequestMapping("private/locations")
 public class LocationController {
 
+	private  MapperFacade mapper;
+
 	@Autowired
 	private LocationService locationService;
 	
 	@Autowired
 	private LabelService labelService;
+	
+	public LocationController() {
+		MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
+	    mapperFactory.classMap(Location.class, LocationDto.class).byDefault();
+	    mapperFactory.classMap(LocationDto.class, Location.class).byDefault();
+	    mapper = mapperFactory.getMapperFacade();
+	}
 	
 	@GetMapping("restlocations")
 	public String getRestLocations(Model model) {
@@ -33,14 +50,22 @@ public class LocationController {
 	}
 	@GetMapping("locations")
 	public String getLocations(Model model) {
-		model.addAttribute("locations",locationService.getAllLocations());
+		/*getting*/
+		List<LocationDto> locationsDto = locationService.getAllLocations();
+		/* mapping */
+		List<Location> locations = mapper.mapAsList(locationsDto, Location.class);
+		model.addAttribute("locations",locations);
 		return "private/locations/restlocations";
 	}
 	
 	@GetMapping("addLocation")
 	public String addLocation(Model model) {
 		model.addAttribute("location", new Location());
-		model.addAttribute("labels", labelService.getAllLabels());
+		/*getting*/
+		List<LabelDto> labelsDto= labelService.getAllLabels();
+		/* mapping */
+		List<Label> labels = mapper.mapAsList(labelsDto, Label.class);
+		model.addAttribute("labels", labels);
 		return "private/locations/addLocation";
 		
 	}
@@ -49,27 +74,38 @@ public class LocationController {
         if (result.hasErrors()) {
             return "private/locations/addLocation";
         }
-		locationService.saveLocation(location);
+        /*mapping*/
+        LocationDto locationDto= mapper.map(location, LocationDto.class);
+		locationService.saveLocation(locationDto);
 		return "redirect:/private/locations/locations";
 	}
 	
 	@GetMapping("editLocation/{id}")
 	public String editLocation(@PathVariable (value="id")Long id, Model model) {
-		model.addAttribute("location", locationService.getLocation(id));
-		model.addAttribute("labels", labelService.getAllLabels());
+		/*getting*/
+		LocationDto locationDto = locationService.getLocation(id);
+		/*mapping*/
+		Location location = mapper.map(locationDto, Location.class);
+		model.addAttribute("location", location);
+		/*getting*/
+		List<LabelDto> labelsDto = labelService.getAllLabels();
+		/*mapping*/
+		List<Label> locations = mapper.mapAsList(labelsDto, Label.class);
+		model.addAttribute("labels", locations);
 		return "private/locations/editLocation";
 		
 	}
 	@PostMapping("updateLocation/{id}")
 	public String updateLocation(@PathVariable (value="id")Long id, @Valid Location location, Model model) {
-		locationService.updateLocation(location);
+        /*mapping*/
+		LocationDto locationDto= mapper.map(location, LocationDto.class);
+		locationService.updateLocation(locationDto);
 		return "redirect:/private/locations/locations";
 	}
 	
 	@GetMapping("deleteLocation/{id}")
 	public String deleteLocation(@PathVariable(value="id") Long noteId, Model model) {
 		locationService.deleteLocation(noteId);
-		model.addAttribute("locations",locationService.getAllLocations());
 		return "redirect:/private/locations/restlocations";
 	}
 }
