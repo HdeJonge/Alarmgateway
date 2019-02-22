@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import nl.bprocare.alarmgateway.dto.AlarmgatewayDto;
+import nl.bprocare.alarmgateway.dto.AlarmgatewayDTO;
 import nl.bprocare.alarmgateway.pojo.Alarmgateway;
 import nl.bprocare.alarmgateway.repository.AlarmgatewayRepository;
 
@@ -15,16 +15,16 @@ public class AlarmgatewayService {
 	@Autowired
 	private AlarmgatewayRepository alarmgatewayRepository;
 	
-	public List<AlarmgatewayDto> getAllAlarmgateways(){
+	public List<Alarmgateway> getAllAlarmgateways(){
 		return alarmgatewayRepository.findAll();
 	}
 
-	public void saveAlarmgateway(AlarmgatewayDto alarmgateway) {
+	public void saveAlarmgateway(Alarmgateway alarmgateway) {
 		alarmgatewayRepository.save(alarmgateway);
 		
 	}
 
-	public AlarmgatewayDto getAlarmgateway(Long id) {
+	public Alarmgateway getAlarmgateway(Long id) {
 		return alarmgatewayRepository.findById(id).get();
 	}
 

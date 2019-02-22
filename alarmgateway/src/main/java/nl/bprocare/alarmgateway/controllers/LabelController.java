@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
-import nl.bprocare.alarmgateway.dto.LabelDto;
-import nl.bprocare.alarmgateway.dto.LocationDto;
+import nl.bprocare.alarmgateway.dto.LabelDTO;
+import nl.bprocare.alarmgateway.dto.LocationDTO;
 import nl.bprocare.alarmgateway.pojo.Label;
 import nl.bprocare.alarmgateway.pojo.Location;
 import nl.bprocare.alarmgateway.service.LabelService;
@@ -30,8 +30,8 @@ public class LabelController {
 	
 	public LabelController() {
 		MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
-	    mapperFactory.classMap(Label.class, LabelDto.class).byDefault();
-	    mapperFactory.classMap(LabelDto.class, Label.class).byDefault();
+	    mapperFactory.classMap(LabelDTO.class, Label.class).byDefault();
+	    mapperFactory.classMap(Label.class, LabelDTO.class).byDefault();
 	    mapper = mapperFactory.getMapperFacade();
 	}
 	@GetMapping("labels")
@@ -40,29 +40,29 @@ public class LabelController {
 	}
 	@GetMapping("addLabel")
 	public String addLabel(Model model) {
-		model.addAttribute("label", new Label());
+		model.addAttribute("label", new LabelDTO());
 		return "private/labels/addLabel";
 	}
 	@PostMapping("saveLabel")
-	public String saveLabel(@ModelAttribute Label label, Model model) {
+	public String saveLabel(@ModelAttribute LabelDTO label, Model model) {
 		/*mapping*/
-		LabelDto labelDto = mapper.map(label, LabelDto.class);
+		Label labelDto = mapper.map(label, Label.class);
 		labelService.saveLabel(labelDto);
 		return "redirect:/private/labels";
 	}
 	@GetMapping("editLabel/{id}")
 	public String editLabel(@PathVariable(value="id") Long id, Model model) {
 		/*getting*/
-		LabelDto label = labelService.getLabel(id);
+		Label label = labelService.getLabel(id);
 		/*mapping*/
-		LabelDto labelDto = mapper.map(label, LabelDto.class);
+		Label labelDto = mapper.map(label, Label.class);
 		model.addAttribute("label",labelDto );
 		return "private/labels/editLabel";
 	}
 	@PostMapping("updateLabel/{id}")
-	public String updateLabel(@ModelAttribute Label label) {
+	public String updateLabel(@ModelAttribute LabelDTO label) {
 		/*mapping*/
-		LabelDto labelDto = mapper.map(label, LabelDto.class);
+		Label labelDto = mapper.map(label, Label.class);
 		labelService.saveLabel(labelDto);
 		return "redirect:/private/labels";
 	}

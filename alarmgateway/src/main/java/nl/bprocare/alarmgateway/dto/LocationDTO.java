@@ -1,50 +1,60 @@
 package nl.bprocare.alarmgateway.dto;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import constraints.UniqueLocation;
 
 import java.util.List;
-import javax.persistence.*;
 
-@Entity
-@Table(name = "locations")
-
-public class LocationDto {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+@UniqueLocation(
+		postalCode = "postalCode",
+		streetNumber = "streetNumber"
+		)
+public class LocationDTO {
 	private Long id;
+	@NotNull
+	@NotEmpty
 	private String street;
+	@NotNull
+	@NotEmpty
 	private String streetNumber;
+	@NotNull
+	@NotEmpty
 	private String town;
+	@NotNull
+	@NotEmpty
 	private String postalCode;
+	@NotNull
+	@NotEmpty
 	private String phoneNumber;
-	
-	 @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH})
-	    @JoinTable(
-	            name = "location_label", 
-	            joinColumns = { @JoinColumn(name = "location_id") }, 
-	            inverseJoinColumns = { @JoinColumn(name = "label_id") }
-	        )
-	private List<LabelDto> labelList;
 
-	public List<LabelDto> getLabelList() {
+	private List<LabelDTO> labelList;
+
+	public List<LabelDTO> getLabelList() {
 		return labelList;
 	}
 
-	public void setLabelList(List<LabelDto> labels) {
+	public void setLabelList(List<LabelDTO> labels) {
 		this.labelList = labels;
 	}
 
-	public void addLabel(LabelDto label) {
+	public void addLabel(LabelDTO label) {
 		this.labelList.add(label);
 	}
-	public void removeLabel(LabelDto label) {
+	public void removeLabel(LabelDTO label) {
 		this.labelList.remove(label);
 	}
-	public LocationDto() {
+	public LocationDTO() {
 		
 	}
 
@@ -95,7 +105,7 @@ public class LocationDto {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public String getLocation() {
+	public String getLocationDescription() {
 		return 
 				street + " " 
 				+ streetNumber +  " "

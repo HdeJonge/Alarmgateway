@@ -1,27 +1,19 @@
 package nl.bprocare.alarmgateway.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import nl.bprocare.alarmgateway.pojo.SettingsProfile;
 
-@Entity
-@Table(name="alarm_gateway")
-public class AlarmgatewayDto {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+public class AlarmgatewayDTO {
+
 	private Long id;
+	@NotEmpty
 	private String mac;
 	private SettingsProfile settingsProfile;
+
+	private LocationDTO location;
 	
-	@OneToOne
-	private LocationDto location;
-	
-	public AlarmgatewayDto() {
+	public AlarmgatewayDTO() {
 		
 	}
 	
@@ -46,10 +38,10 @@ public class AlarmgatewayDto {
 		this.settingsProfile = settingsProfile;
 	}
 	
-	public LocationDto getLocation() {
+	public LocationDTO getLocation() {
 		return location;
 	}
-	public void setLocation(LocationDto location) {
+	public void setLocation(LocationDTO location) {
 		this.location = location;
 	}
 }

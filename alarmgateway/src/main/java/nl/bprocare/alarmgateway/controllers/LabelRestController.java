@@ -8,7 +8,7 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import nl.bprocare.alarmgateway.dto.LabelDto;
+import nl.bprocare.alarmgateway.dto.LabelDTO;
 import nl.bprocare.alarmgateway.pojo.Label;
 import nl.bprocare.alarmgateway.repository.LabelRestRepository;
 
@@ -18,7 +18,7 @@ public class LabelRestController {
 	private LabelRestRepository repository;
 	
 	@GetMapping("/restlabels")
-	public DataTablesOutput<LabelDto> getLabels(@Valid DataTablesInput input){
+	public DataTablesOutput<Label> getLabels(@Valid DataTablesInput input){
 		return repository.findAll(input);
 	}
 }

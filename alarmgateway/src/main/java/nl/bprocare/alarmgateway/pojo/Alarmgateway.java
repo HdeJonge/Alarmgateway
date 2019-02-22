@@ -1,15 +1,22 @@
 package nl.bprocare.alarmgateway.pojo;
 
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="alarm_gateway")
 public class Alarmgateway {
-
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	@NotEmpty
 	private String mac;
-	@NotEmpty
 	private SettingsProfile settingsProfile;
-
+	
+	@OneToOne
 	private Location location;
 	
 	public Alarmgateway() {

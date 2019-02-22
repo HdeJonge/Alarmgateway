@@ -9,7 +9,7 @@
 	<div class="container">
 		<h1>edit gateway</h1>
 
-		<form action="#" th:action="@{/private/alarmgateways/updateGateway/{id}(id=${gateway.id})}" th:object="${gateway}" method="post">
+		<form action="#" th:action="@{/private/alarmgateways/updateGateway/{id}(id=${alarmgatewayDTO.id})}" th:object="${alarmgatewayDTO}" method="post">
 			<div class="form-group">
 				<label>MAC:</label> 
 				<input type="text" id="macAddress" class="form-control" th:field="*{mac}" pattern="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$"/>
@@ -17,15 +17,15 @@
 			<div class="form-group">
 				<label>profile:</label> 
 				<select th:field="*{settingsProfile}" class="form-control">
-					<option th:each="profile:${T(nl.bprocare.alarmgateway.domain.SettingsProfile).values()}" 
+					<option th:each="profile:${T(nl.bprocare.alarmgateway.pojo.SettingsProfile).values()}" 
 					th:value="${profile}" 
 					th:utext="${profile}">
 				</select>
 			</div>
 			<div class="form-group">
 				<label>location</label> 
-				<select th:field="*{location}" class="form-control">
-					<option th:each="location:${locations}" th:value="${location.id}" th:utext="${location.location}">
+				<select th:field="*{location.id}" class="form-control">
+					<option th:each="location:${locationsDTO}" th:value="${location.id}" th:utext="${location.locationDescription}">
 				</select>
 			</div>
 			<button type="submit" class="btn btn-primary">Submit</button>

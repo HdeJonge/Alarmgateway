@@ -13,20 +13,20 @@
 		<div id="content">
 			<!--/*/ <th:block th:include="/fragments/sidebar :: content-fragment"></th:block> /*/-->
 
-			<form action="#" th:action="@{saveGateway}" th:object="${gateway}" method="post">
+			<form action="#" th:action="@{saveGateway}" th:object="${alarmgatewayDTO}" method="post">
 				<div class="form-group">
-					<label>MAC:</label> <input type="text" id="macAddress" class="form-control" th:field="*{mac}"
-						pattern="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$" />
+					<label>MAC:</label> <input type="text" id="macAddress" class="form-control" th:field="*{mac}"/>
+					<p th:if="${#fields.hasErrors('mac')}" th:errors="*{mac}">Name Error</p>
 				</div>
 				<div class="form-group">
 					<label>profile:</label> <select th:field="*{settingsProfile}" class="form-control">
-						<option th:each="profile:${T(nl.bprocare.alarmgateway.domain.SettingsProfile).values()}" th:value="${profile}"
+						<option th:each="profile:${T(nl.bprocare.alarmgateway.pojo.SettingsProfile).values()}" th:value="${profile}"
 							th:utext="${profile}">
 					</select>
 				</div>
 				<div class="form-group">
-					<label>location</label> <select th:field="*{location}" class="form-control">
-						<option th:each="location:${locations}" th:value="${location.id}" th:utext="${location.location}">
+					<label>location</label> <select th:field="*{location.id}" class="form-control">
+						<option th:each="location:${locationsDTO}" th:value="${location.id}" th:utext="${location.locationDescription}">
 					</select>
 				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>

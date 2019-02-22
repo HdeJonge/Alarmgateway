@@ -1,35 +1,32 @@
 package nl.bprocare.alarmgateway.pojo;
 
+import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import constraints.UniqueLocation;
 
 import java.util.List;
+import javax.persistence.*;
 
-@UniqueLocation(
-		postalCode = "postalCode",
-		streetNumber = "streetNumber"
-		)
-		
+@Entity
+@Table(name = "locations")
 public class Location {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-	@NotNull
-	@NotEmpty
 	private String street;
-	@NotNull
-	@NotEmpty
 	private String streetNumber;
-	@NotNull
-	@NotEmpty
 	private String town;
-	@NotNull
-	@NotEmpty
 	private String postalCode;
-	@NotNull
-	@NotEmpty
 	private String phoneNumber;
-
+	
+	 @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH})
+	    @JoinTable(
+	            name = "location_label", 
+	            joinColumns = { @JoinColumn(name = "location_id") }, 
+	            inverseJoinColumns = { @JoinColumn(name = "label_id") }
+	        )
 	private List<Label> labelList;
 
 	public List<Label> getLabelList() {
@@ -97,7 +94,7 @@ public class Location {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public String getLocation() {
+	public String getLocationDescription() {
 		return 
 				street + " " 
 				+ streetNumber +  " "
