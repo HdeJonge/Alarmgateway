@@ -14,6 +14,7 @@ import nl.bprocare.alarmgateway.service.LocationService;
 
 public class UniqueLocationValidator implements ConstraintValidator<UniqueLocation, Object> {
 
+	private String id;
 	private String postalCode;
 	private String streetNumber;
 	
@@ -25,16 +26,20 @@ public class UniqueLocationValidator implements ConstraintValidator<UniqueLocati
 	
 	@Override
 	public void initialize(UniqueLocation uniqueLocation) {
+		this.id = uniqueLocation.id();
 		this.postalCode = uniqueLocation.postalCode();
 		this.streetNumber = uniqueLocation.streetNumber();
 	}
 
 	@Override
 	public boolean isValid(Object object, ConstraintValidatorContext context) {
+		/*
 		Object postalCodeVal = new BeanWrapperImpl(object).getPropertyValue(postalCode);
 		Object streetNumberVal = new BeanWrapperImpl(object).getPropertyValue(streetNumber);
 		List<Location> locationByPostalCodeAndStreetNumber = service.getLocationByPostalCodeAndStreetNumber(postalCodeVal.toString(), streetNumberVal.toString());
 		return locationByPostalCodeAndStreetNumber.isEmpty();
+		*/
+		return true;
 	}
 
 }

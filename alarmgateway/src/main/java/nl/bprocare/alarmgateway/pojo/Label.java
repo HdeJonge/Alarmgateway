@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import nl.bprocare.alarmgateway.dto.LabelDTO;
+
 @Entity
 @Table(name = "labels")
 public class Label {
@@ -34,6 +36,18 @@ public class Label {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Label l = (Label) o;
+        return id == l.id &&
+                description.equals(l.description);
+    }
 	
 
 }

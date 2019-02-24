@@ -61,35 +61,24 @@ public class LocationController {
 
 	@GetMapping("addLocation")
 	public String addLocation(Model model) {
-		/*
-		 * model.addAttribute("locationDTO", new LocationDTO());
-		 * 
-		 * List<Label> labels= labelService.getAllLabels();
-		 * 
-		 * List<LabelDTO> labelsDTO = mapper.mapAsList(labels, LabelDTO.class);
-		 * model.addAttribute("labelsDTO", labelsDTO); return
-		 * "private/locations/addLocation";
-		 */
-		model.addAttribute("locationDTO", new Location());
+		
+		 model.addAttribute("locationDTO", new LocationDTO());
+		  
+		  List<Label> labels= labelService.getAllLabels();
+		  
+		  List<LabelDTO> labelsDTO = mapper.mapAsList(labels, LabelDTO.class);
+		  model.addAttribute("labelsDTO", labelsDTO); return
+		  "private/locations/addLocation";
 
-		List<Label> labels = labelService.getAllLabels();
-
-		model.addAttribute("labelsDTO", labels);
-		return "private/locations/addLocation";
 	}
 
 	@PostMapping("saveLocation")
-	public String saveLocation(@Valid Location location, BindingResult result, Model model) {
-		/*
-		 * if (result.hasErrors()) { return "private/locations/addLocation"; } Location
-		 * location= mapper.map(locationDTO, Location.class);
-		 * locationService.saveLocation(location); return
-		 * "redirect:/private/locations/locations";
-		 */
-		
+	public String saveLocation(@Valid Location locationDTO, BindingResult result, Model model) {
+
 		if (result.hasErrors()) {
 			return "private/locations/addLocation";
 		}
+		Location location = mapper.map(locationDTO, Location.class);
 		locationService.saveLocation(location);
 		return "redirect:/private/locations/locations";
 
@@ -105,14 +94,18 @@ public class LocationController {
 		/* getting */
 		List<Label> labelsDto = labelService.getAllLabels();
 		/* mapping */
-		List<LabelDTO> locations = mapper.mapAsList(labelsDto, LabelDTO.class);
-		model.addAttribute("labels", locations);
+		List<LabelDTO> labelsDTO = mapper.mapAsList(labelsDto, LabelDTO.class);
+		
+		model.addAttribute("labelsDTO", labelsDTO);
 		return "private/locations/editLocation";
 
 	}
 
 	@PostMapping("updateLocation/{id}")
-	public String updateLocation(@PathVariable(value = "id") Long id, @Valid LocationDTO location, Model model) {
+	public String updateLocation(@PathVariable(value = "id") Long id, @Valid LocationDTO location, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			return "private/locations/editLocation";
+		}
 		/* mapping */
 		Location locationDto = mapper.map(location, Location.class);
 		locationService.updateLocation(locationDto);

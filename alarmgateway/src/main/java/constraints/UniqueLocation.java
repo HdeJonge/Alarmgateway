@@ -12,6 +12,8 @@ public @interface UniqueLocation {
 
 	String message() default "combination of postal code and street number must be unique";
 
+	String id();
+	
 	String postalCode();
 
 	String streetNumber();

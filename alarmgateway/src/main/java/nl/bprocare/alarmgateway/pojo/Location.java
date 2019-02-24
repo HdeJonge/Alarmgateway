@@ -1,6 +1,5 @@
 package nl.bprocare.alarmgateway.pojo;
 
-import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -21,7 +20,9 @@ public class Location {
 	private String postalCode;
 	private String phoneNumber;
 	
-	 @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH})
+    @ManyToMany(cascade = {
+            CascadeType.MERGE
+        })
 	    @JoinTable(
 	            name = "location_label", 
 	            joinColumns = { @JoinColumn(name = "location_id") }, 

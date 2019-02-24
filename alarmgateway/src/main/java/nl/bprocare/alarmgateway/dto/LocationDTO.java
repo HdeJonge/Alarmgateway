@@ -17,8 +17,10 @@ import constraints.UniqueLocation;
 import java.util.List;
 
 @UniqueLocation(
+		id = "id",
 		postalCode = "postalCode",
 		streetNumber = "streetNumber"
+		
 		)
 public class LocationDTO {
 	private Long id;
