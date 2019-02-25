@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Add label</title>
+<title>edit label</title>
 <!--/*/ <th:block th:include="/fragments/scripts :: head"></th:block> /*/-->
 </head>
 <body>
@@ -12,7 +12,7 @@
 		</nav>
 		<div id="content">
 			<!--/*/ <th:block th:include="/fragments/sidebar :: content-fragment"></th:block> /*/-->
-			<h1>add label</h1>
+			<h1>edit label</h1>
 			<form action="#" th:action="@{/private/updateLabel/{id}(id=${label.id})}" th:object="${label}" method="post">
 				<div class="form-group">
 					<label>description:</label>
