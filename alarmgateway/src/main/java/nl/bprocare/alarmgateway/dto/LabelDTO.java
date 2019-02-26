@@ -2,9 +2,12 @@ package nl.bprocare.alarmgateway.dto;
 
 import java.util.Objects;
 
+import javax.validation.constraints.NotEmpty;
+
 public class LabelDTO {
 
 	private Long id;
+	@NotEmpty
 	private String description;
 	
 	public LabelDTO() {

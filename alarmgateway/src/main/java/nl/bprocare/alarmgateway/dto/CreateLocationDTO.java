@@ -22,8 +22,7 @@ import java.util.List;
 		streetNumber = "streetNumber"
 		
 		)
-public class LocationDTO {
-	private Long id;
+public class CreateLocationDTO {
 	@NotNull
 	@NotEmpty
 	private String street;
@@ -56,16 +55,8 @@ public class LocationDTO {
 	public void removeLabel(LabelDTO label) {
 		this.labelList.remove(label);
 	}
-	public LocationDTO() {
+	public CreateLocationDTO() {
 		
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getStreet() {

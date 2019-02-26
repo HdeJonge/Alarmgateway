@@ -7,27 +7,36 @@
 
 </head>
 <body>
-	<div class="container">
-		<table class="table">
-			<tr>
-				<th>id</th>
-				<th>MAC</th>
-				<th>profile</th>
-				<th>edit</th>
-				<th>delete</th>
-			</tr>
-			<tbody>
-				<tr th:each="gateway: ${gateways}">
-					<td th:text="${gateway.id}" />
-					<td th:text="${gateway.mac}" />
-					<td th:text="${gateway.settingsProfile}" />
-					<td><a th:href="@{editGateway/{id}(id=${gateway.id})}" class="btn btn-secondary"><i class="glyphicon glyphicon-edit"></i></a></td>
-					<td><a th:href="@{deleteGateway/{id}(id=${gateway.id})}" class="btn btn-danger"><i class="glyphicon glyphicon-remove-sign"></i></a></td>
+	<div class="wrapper">
+		<nav id="sidebar">
+			<!--/*/ <th:block th:include="/fragments/sidebar :: sidebar-fragment"></th:block> /*/-->
+		</nav>
+		<div id="content">
+			<!--/*/ <th:block th:include="/fragments/sidebar :: content-fragment"></th:block> /*/-->
+
+			<table class="table">
+				<tr>
+					<th>id</th>
+					<th>MAC</th>
+					<th>profile</th>
+					<th>edit</th>
+					<th>delete</th>
 				</tr>
-			</tbody>
-		</table>
-		<a class="btn btn-primary" href="/private/alarmgateways/addGateway">Add gateway</a> <a class="btn btn-primary"
-			href="/locations/locations">locations</a>
+				<tbody>
+					<tr th:each="gateway: ${gateways}">
+						<td th:text="${gateway.id}" />
+						<td th:text="${gateway.mac}" />
+						<td th:text="${gateway.settingsProfile}" />
+						<td><a th:href="@{editGateway/{id}(id=${gateway.id})}" class="btn btn-secondary"><i
+								class="glyphicon glyphicon-edit"></i></a></td>
+						<td><a th:href="@{deleteGateway/{id}(id=${gateway.id})}" class="btn btn-danger"><i
+								class="glyphicon glyphicon-remove-sign"></i></a></td>
+					</tr>
+				</tbody>
+			</table>
+			<a class="btn btn-primary" href="/private/alarmgateways/addGateway">Add gateway</a> <a class="btn btn-primary"
+				href="/locations/locations">locations</a>
+		</div>
 	</div>
 	<script>
 		$(document).ready(function() {

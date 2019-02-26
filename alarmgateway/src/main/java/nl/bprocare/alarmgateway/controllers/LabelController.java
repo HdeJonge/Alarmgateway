@@ -3,6 +3,7 @@ package nl.bprocare.alarmgateway.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,7 @@ import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import nl.bprocare.alarmgateway.dto.LabelDTO;
-import nl.bprocare.alarmgateway.dto.LocationDTO;
+import nl.bprocare.alarmgateway.dto.EditLocationDTO;
 import nl.bprocare.alarmgateway.pojo.Label;
 import nl.bprocare.alarmgateway.pojo.Location;
 import nl.bprocare.alarmgateway.service.LabelService;
@@ -44,7 +45,11 @@ public class LabelController {
 		return "private/labels/addLabel";
 	}
 	@PostMapping("saveLabel")
-	public String saveLabel(@ModelAttribute LabelDTO label, Model model) {
+	public String saveLabel(@ModelAttribute LabelDTO label,BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			model.addAttribute("label", label);
+			return "private/labels/editLabel";
+		}
 		/*mapping*/
 		Label labelDto = mapper.map(label, Label.class);
 		labelService.saveLabel(labelDto);
@@ -60,7 +65,11 @@ public class LabelController {
 		return "private/labels/editLabel";
 	}
 	@PostMapping("updateLabel/{id}")
-	public String updateLabel(@ModelAttribute LabelDTO label) {
+	public String updateLabel(@ModelAttribute LabelDTO label, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			model.addAttribute("label", label);
+			return "private/labels/editLabel";
+		}
 		/*mapping*/
 		Label labelDto = mapper.map(label, Label.class);
 		labelService.saveLabel(labelDto);

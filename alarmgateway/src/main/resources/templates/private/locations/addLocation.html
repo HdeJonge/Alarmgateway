@@ -17,7 +17,7 @@
 			<!--/*/ <th:block th:include="/fragments/sidebar :: content-fragment"></th:block> /*/-->
 
 			<h1>add location</h1>
-			
+
 			<form action="#" th:action="@{saveLocation}" th:object="${locationDTO}" method="post">
 				<div class="form-group">
 					<label>street:</label> <input type="text" class="form-control" th:field="*{street}" />
@@ -29,7 +29,7 @@
 				</div>
 				<div class="form-group">
 					<label>town</label> <input type="text" class="form-control" th:field="*{town}" />
-					<p th:if="${#fields.hasErrors('town')}" th:errors="*{town}">Name Error</p>
+					<p th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}">Name Error</p>
 				</div>
 				<div class="form-group">
 					<label>postal code</label> <input type="text" class="form-control" th:field="*{postalCode}"
@@ -41,16 +41,12 @@
 					<p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Name Error</p>
 				</div>
 				<div class="form-group">
-					<label>label:</label>
-					<select id="labelList" th:field="*{labelList}" name="labelList" class="js-example-basic-multiple"
-						multiple="multiple" style="width: 100%">
-						<option 
-						th:each="label:${labelsDTO}" 
-						th:value="${label.id}"
-						th:text="${label.description}">label</option>
+					<label>label:</label> <select id="labelList" th:field="*{labelList}" name="labelList"
+						class="js-example-basic-multiple" multiple="multiple" style="width: 100%">
+						<option th:each="label:${labelsDTO}" th:value="${label.id}" th:text="${label.description}">label</option>
 					</select>
 				</div>
-				<p class="help-block" th:errors="${locationDTO}"></p> 
+				<p class="help-block" th:errors="${locationDTO}"></p>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
 		</div>

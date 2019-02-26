@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import nl.bprocare.alarmgateway.dto.LocationDTO;
+import nl.bprocare.alarmgateway.dto.EditLocationDTO;
 import nl.bprocare.alarmgateway.pojo.Location;
 import nl.bprocare.alarmgateway.repository.LocationRepository;
 

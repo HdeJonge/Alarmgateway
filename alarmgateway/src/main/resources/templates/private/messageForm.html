@@ -7,14 +7,21 @@
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 </head>
 <body>
-	<div>
-		<form action="#" th:action="@{sendMessage}" th:object="${alarmMessageDTO}" method="post">
-			<div class="form-group">
-				<label>type</label> <input type="text" class="form-control" th:field="*{type}" /> <label>message</label> <input
-					type="text" class="form-control" th:field="*{message}" />
-			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
-		</form>
+	<div class="wrapper">
+		<nav id="sidebar">
+			<!--/*/ <th:block th:include="/fragments/sidebar :: sidebar-fragment"></th:block> /*/-->
+		</nav>
+		<div id="content">
+			<!--/*/ <th:block th:include="/fragments/sidebar :: content-fragment"></th:block> /*/-->
+
+			<form action="#" th:action="@{sendMessage}" th:object="${alarmMessageDTO}" method="post">
+				<div class="form-group">
+					<label>type</label> <input type="text" class="form-control" th:field="*{type}" /> <label>message</label> <input
+						type="text" class="form-control" th:field="*{message}" />
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
 	</div>
 </body>
 </html>

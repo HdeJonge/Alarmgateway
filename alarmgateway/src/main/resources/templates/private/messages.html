@@ -7,28 +7,36 @@
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 </head>
 <body>
-	<div>
-		<button id="connectButton" onclick="connect();" class="btn btn-primary" type="button">connect</button>
-		<div id="messages" class="messages"></div>
-	</div>
-	<div th:fragment="js">
-		<script type="text/javascript">
-			const messageWindow = document.getElementById("messages");
-			function connect() {
-				var socket = new SockJS('/private/message');
-				socket.onopen = function() {
-					alert("Open")
-				};
-				socket.onmessage = function(e) {
-		        	var data = JSON.parse(e.data);
-		            addMessageToWindow('Got Message with type: ' + data.type  + ' and message: ' + data.message);
-				}
-			}
+	<div class="wrapper">
+		<nav id="sidebar">
+			<!--/*/ <th:block th:include="/fragments/sidebar :: sidebar-fragment"></th:block> /*/-->
+		</nav>
+		<div id="content">
+			<!--/*/ <th:block th:include="/fragments/sidebar :: content-fragment"></th:block> /*/-->
 
-			function addMessageToWindow(message) {
-				messageWindow.innerHTML += `<div>${message}</div>`
-			}
-		</script>
+			<button id="connectButton" onclick="connect();" class="btn btn-primary" type="button">connect</button>
+			<div id="messages" class="messages"></div>
+		</div>
+		<div th:fragment="js">
+			<script type="text/javascript">
+				const messageWindow = document.getElementById("messages");
+				function connect() {
+					var socket = new SockJS('/private/message');
+					socket.onopen = function() {
+						alert("Open")
+					};
+					socket.onmessage = function(e) {
+						var data = JSON.parse(e.data);
+						addMessageToWindow('Got Message with type: '
+								+ data.type + ' and message: ' + data.message);
+					}
+				}
+
+				function addMessageToWindow(message) {
+					messageWindow.innerHTML += `<div>${message}</div>`
+				}
+			</script>
+		</div>
 	</div>
 </body>
 </html>

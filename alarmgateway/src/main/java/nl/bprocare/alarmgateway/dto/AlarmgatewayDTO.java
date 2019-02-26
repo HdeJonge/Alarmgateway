@@ -11,7 +11,7 @@ public class AlarmgatewayDTO {
 	private String mac;
 	private SettingsProfile settingsProfile;
 
-	private LocationDTO location;
+	private EditLocationDTO location;
 	
 	public AlarmgatewayDTO() {
 		
@@ -38,10 +38,10 @@ public class AlarmgatewayDTO {
 		this.settingsProfile = settingsProfile;
 	}
 	
-	public LocationDTO getLocation() {
+	public EditLocationDTO getLocation() {
 		return location;
 	}
-	public void setLocation(LocationDTO location) {
+	public void setLocation(EditLocationDTO location) {
 		this.location = location;
 	}
 }

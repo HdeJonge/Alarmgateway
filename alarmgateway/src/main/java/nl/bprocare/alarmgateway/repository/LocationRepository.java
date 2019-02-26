@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import nl.bprocare.alarmgateway.dto.LocationDTO;
+import nl.bprocare.alarmgateway.dto.EditLocationDTO;
 import nl.bprocare.alarmgateway.pojo.Location;
 
 @Repository("locationRepository")

@@ -18,8 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
+import nl.bprocare.alarmgateway.dto.CreateLocationDTO;
 import nl.bprocare.alarmgateway.dto.LabelDTO;
-import nl.bprocare.alarmgateway.dto.LocationDTO;
+import nl.bprocare.alarmgateway.dto.EditLocationDTO;
 import nl.bprocare.alarmgateway.pojo.Label;
 import nl.bprocare.alarmgateway.pojo.Location;
 import nl.bprocare.alarmgateway.service.LabelService;
@@ -39,8 +40,9 @@ public class LocationController {
 
 	public LocationController() {
 		MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
-		mapperFactory.classMap(LocationDTO.class, Location.class).byDefault();
-		mapperFactory.classMap(Location.class, LocationDTO.class).byDefault();
+		mapperFactory.classMap(EditLocationDTO.class, Location.class).byDefault();
+		mapperFactory.classMap(CreateLocationDTO.class, Location.class).byDefault();
+		mapperFactory.classMap(Location.class, EditLocationDTO.class).byDefault();
 		mapper = mapperFactory.getMapperFacade();
 	}
 
@@ -54,28 +56,29 @@ public class LocationController {
 		/* getting */
 		List<Location> locationsDto = locationService.getAllLocations();
 		/* mapping */
-		List<LocationDTO> locations = mapper.mapAsList(locationsDto, LocationDTO.class);
+		List<EditLocationDTO> locations = mapper.mapAsList(locationsDto, EditLocationDTO.class);
 		model.addAttribute("locations", locations);
 		return "private/locations/restlocations";
 	}
 
 	@GetMapping("addLocation")
 	public String addLocation(Model model) {
-		
-		 model.addAttribute("locationDTO", new LocationDTO());
-		  
+		 model.addAttribute("locationDTO", new CreateLocationDTO());
 		  List<Label> labels= labelService.getAllLabels();
-		  
 		  List<LabelDTO> labelsDTO = mapper.mapAsList(labels, LabelDTO.class);
-		  model.addAttribute("labelsDTO", labelsDTO); return
-		  "private/locations/addLocation";
-
+		  model.addAttribute("labelsDTO", labelsDTO); 
+		  return "private/locations/addLocation";
 	}
 
 	@PostMapping("saveLocation")
-	public String saveLocation(@Valid Location locationDTO, BindingResult result, Model model) {
-
+	public String saveLocation(@Valid CreateLocationDTO locationDTO, BindingResult result, Model model) {
 		if (result.hasErrors()) {
+			model.addAttribute("locationDTO", locationDTO);
+			/* getting */
+			List<Label> labelsDto = labelService.getAllLabels();
+			/* mapping */
+			List<LabelDTO> labelsDTO = mapper.mapAsList(labelsDto, LabelDTO.class);
+			model.addAttribute("labelsDTO", labelsDTO);
 			return "private/locations/addLocation";
 		}
 		Location location = mapper.map(locationDTO, Location.class);
@@ -89,8 +92,8 @@ public class LocationController {
 		/* getting */
 		Location locationDto = locationService.getLocation(id);
 		/* mapping */
-		LocationDTO location = mapper.map(locationDto, LocationDTO.class);
-		model.addAttribute("location", location);
+		EditLocationDTO locationDTO = mapper.map(locationDto, EditLocationDTO.class);
+		model.addAttribute("locationDTO", locationDTO);
 		/* getting */
 		List<Label> labelsDto = labelService.getAllLabels();
 		/* mapping */
@@ -102,12 +105,18 @@ public class LocationController {
 	}
 
 	@PostMapping("updateLocation/{id}")
-	public String updateLocation(@PathVariable(value = "id") Long id, @Valid LocationDTO location, BindingResult result, Model model) {
+	public String updateLocation(@PathVariable(value = "id") Long id, @Valid EditLocationDTO locationDTO, BindingResult result, Model model) {
 		if (result.hasErrors()) {
+			model.addAttribute("locationDTO", locationDTO);
+			/* getting */
+			List<Label> labelsDto = labelService.getAllLabels();
+			/* mapping */
+			List<LabelDTO> labelsDTO = mapper.mapAsList(labelsDto, LabelDTO.class);
+			model.addAttribute("labelsDTO", labelsDTO);
 			return "private/locations/editLocation";
 		}
 		/* mapping */
-		Location locationDto = mapper.map(location, Location.class);
+		Location locationDto = mapper.map(locationDTO, Location.class);
 		locationService.updateLocation(locationDto);
 		return "redirect:/private/locations/locations";
 	}
