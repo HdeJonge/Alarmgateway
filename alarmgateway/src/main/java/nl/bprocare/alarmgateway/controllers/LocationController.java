@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -63,7 +64,7 @@ public class LocationController {
 
 	@GetMapping("addLocation")
 	public String addLocation(Model model) {
-		 model.addAttribute("locationDTO", new CreateLocationDTO());
+		 model.addAttribute("createLocationDTO", new CreateLocationDTO());
 		  List<Label> labels= labelService.getAllLabels();
 		  List<LabelDTO> labelsDTO = mapper.mapAsList(labels, LabelDTO.class);
 		  model.addAttribute("labelsDTO", labelsDTO); 
@@ -71,9 +72,9 @@ public class LocationController {
 	}
 
 	@PostMapping("saveLocation")
-	public String saveLocation(@Valid CreateLocationDTO locationDTO, BindingResult result, Model model) {
+	public String saveLocation(@Valid CreateLocationDTO createLocationDTO, BindingResult result, Model model) {
 		if (result.hasErrors()) {
-			model.addAttribute("locationDTO", locationDTO);
+			model.addAttribute("createLocationDTO", createLocationDTO);
 			/* getting */
 			List<Label> labelsDto = labelService.getAllLabels();
 			/* mapping */
@@ -81,10 +82,9 @@ public class LocationController {
 			model.addAttribute("labelsDTO", labelsDTO);
 			return "private/locations/addLocation";
 		}
-		Location location = mapper.map(locationDTO, Location.class);
+		Location location = mapper.map(createLocationDTO, Location.class);
 		locationService.saveLocation(location);
 		return "redirect:/private/locations/locations";
-
 	}
 
 	@GetMapping("editLocation/{id}")
@@ -123,7 +123,12 @@ public class LocationController {
 
 	@GetMapping("deleteLocation/{id}")
 	public String deleteLocation(@PathVariable(value = "id") Long noteId, Model model) {
+		try {
 		locationService.deleteLocation(noteId);
+		}catch(DataIntegrityViolationException e){
+			model.addAttribute("error", "cannot delete location, location is must likely in use");
+			return "private/locations/restlocations";
+		}
 		return "redirect:/private/locations/restlocations";
 	}
 }

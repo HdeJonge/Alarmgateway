@@ -18,7 +18,6 @@
 			<h1>edit location</h1>
 			<form action="#" th:action="@{/private/locations/updateLocation/{id}(id=${locationDTO.id})}"
 				th:object="${locationDTO}" method="post">
-
 				<div class="form-group">
 					<label>street:</label> <input type="text" class="form-control" th:field="*{street}" />
 				</div>
@@ -37,7 +36,9 @@
 				<div class="form-group">
 					<label>label</label> <select th:field="*{labelList}" multiple="multiple"
 						class="form-control js-example-basic-multiple">
-						<option th:each="label:${labelsDTO}" th:value="${{label}}" th:utext="${label.description}">
+						<option th:each="label:${labelsDTO}" 
+						th:value="${{label}}" 
+						th:utext="${label.description}">
 					</select>
 				</div>
 				<!--

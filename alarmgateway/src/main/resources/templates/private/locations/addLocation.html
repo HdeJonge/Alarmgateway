@@ -18,35 +18,38 @@
 
 			<h1>add location</h1>
 
-			<form action="#" th:action="@{saveLocation}" th:object="${locationDTO}" method="post">
+			<form action="#" th:action="@{saveLocation}" th:object="${createLocationDTO}" method="post">
 				<div class="form-group">
 					<label>street:</label> <input type="text" class="form-control" th:field="*{street}" />
-					<p th:if="${#fields.hasErrors('street')}" th:errors="*{street}">Name Error</p>
+					<p th:if="${#fields.hasErrors('street')}" th:errors="*{street}" th:errorclass="fieldError">Name Error</p>
 				</div>
 				<div class="form-group">
 					<label>streetnumber:</label> <input type="text" class="form-control" th:field="*{streetNumber}" />
-					<p th:if="${#fields.hasErrors('streetNumber')}" th:errors="*{streetNumber}">Name Error</p>
+					<p th:if="${#fields.hasErrors('streetNumber')}" th:errors="*{streetNumber}" th:errorclass="fieldError">Name Error</p>
 				</div>
 				<div class="form-group">
 					<label>town</label> <input type="text" class="form-control" th:field="*{town}" />
-					<p th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}">Name Error</p>
+					<p th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}" th:errorclass="fieldError">Name Error</p>
 				</div>
 				<div class="form-group">
 					<label>postal code</label> <input type="text" class="form-control" th:field="*{postalCode}"
 						pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}">
-					<p th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}">Name Error</p>
+					<p th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}" th:errorclass="fieldError">Name Error</p>
 				</div>
 				<div class="form-group">
 					<label>phone number</label> <input type="text" class="form-control" th:field="*{phoneNumber}">
-					<p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Name Error</p>
+					<p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" th:errorclass="fieldError">Name Error</p>
 				</div>
 				<div class="form-group">
-					<label>label:</label> <select id="labelList" th:field="*{labelList}" name="labelList"
+					<label>label:</label> 
+					<select id="labelList" th:field="*{labelList}" name="labelList"
 						class="js-example-basic-multiple" multiple="multiple" style="width: 100%">
-						<option th:each="label:${labelsDTO}" th:value="${label.id}" th:text="${label.description}">label</option>
+						<option th:each="label:${labelsDTO}" 
+						th:value="${{label}}" 
+						th:text="${label.description}">label</option>
 					</select>
 				</div>
-				<p class="help-block" th:errors="${locationDTO}"></p>
+				<p class="help-block" th:errors="${createLocationDTO}"></p>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
 		</div>

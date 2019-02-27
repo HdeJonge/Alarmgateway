@@ -1,6 +1,9 @@
 package nl.bprocare.alarmgateway.controllers;
 
+import java.sql.SQLIntegrityConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,6 +40,7 @@ public class LabelController {
 	}
 	@GetMapping("labels")
 	public String getLocations(Model model) {
+		model.addAttribute("test", "test");
 		return "private/labels/labels";
 	}
 	@GetMapping("addLabel")
@@ -76,8 +80,13 @@ public class LabelController {
 		return "redirect:/private/labels";
 	}
 	@GetMapping("deleteLabel/{id}")
-	public String deleteLabel(@PathVariable(value="id") Long id) {
-		labelService.deleteLabel(id);
+	public String deleteLabel(@PathVariable(value="id") Long id,Model model) {
+		try{
+			labelService.deleteLabel(id);
+		}catch(DataIntegrityViolationException e){
+			model.addAttribute("error", "cannot delete label, label is must likely in use");
+			return "private/labels/labels";
+		}
 		return "redirect:/private/labels";
 	}
 }
