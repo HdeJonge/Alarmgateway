@@ -41,20 +41,20 @@ public class EditLocationDTO {
 	private String phoneNumber;
 	@NotNull
 	@NotEmpty
-	private List<LabelDTO> labelList;
+	private List<EditLabelDTO> labelList;
 
-	public List<LabelDTO> getLabelList() {
+	public List<EditLabelDTO> getLabelList() {
 		return labelList;
 	}
 
-	public void setLabelList(List<LabelDTO> labels) {
+	public void setLabelList(List<EditLabelDTO> labels) {
 		this.labelList = labels;
 	}
 
-	public void addLabel(LabelDTO label) {
+	public void addLabel(EditLabelDTO label) {
 		this.labelList.add(label);
 	}
-	public void removeLabel(LabelDTO label) {
+	public void removeLabel(EditLabelDTO label) {
 		this.labelList.remove(label);
 	}
 	public EditLocationDTO() {

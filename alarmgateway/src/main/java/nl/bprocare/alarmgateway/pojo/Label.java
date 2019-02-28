@@ -6,7 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import nl.bprocare.alarmgateway.dto.LabelDTO;
 
 @Entity
 @Table(name = "labels")

@@ -21,7 +21,8 @@ public class Location {
 	private String phoneNumber;
 	
     @ManyToMany(cascade = {
-            CascadeType.MERGE
+            CascadeType.MERGE,
+            CascadeType.DETACH
         })
 	    @JoinTable(
 	            name = "location_label", 

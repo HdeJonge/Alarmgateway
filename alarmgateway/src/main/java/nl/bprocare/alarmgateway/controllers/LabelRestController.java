@@ -8,7 +8,6 @@ import org.springframework.data.jpa.datatables.mapping.DataTablesOutput;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import nl.bprocare.alarmgateway.dto.LabelDTO;
 import nl.bprocare.alarmgateway.pojo.Label;
 import nl.bprocare.alarmgateway.repository.LabelRestRepository;
 

@@ -49,8 +49,10 @@
 				<li th:classappend="${module == 'locations' ? 'active' : ''}"><a href="/private/locations/restlocations">locations</a></li>
 				<li th:classappend="${module == 'labels' ? 'active' : ''}"><a href="/private/labels">labels</a></li>
 
+
 				<li class="active"><a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Messaging</a>
 					<ul class="collapse list-unstyled" id="homeSubmenu">
+						<li><a href="/private/locations/dynamicLocations">dynamic locations</a></li>
 						<li><a href="/private/messageForm">message sender</a></li>
 						<li><a href="/private/messages">message receiver</a></li>
 					</ul>

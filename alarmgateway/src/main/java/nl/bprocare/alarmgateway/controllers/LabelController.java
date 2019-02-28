@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
-import nl.bprocare.alarmgateway.dto.LabelDTO;
 import nl.bprocare.alarmgateway.dto.CreateLabelDTO;
 import nl.bprocare.alarmgateway.dto.EditLabelDTO;
 import nl.bprocare.alarmgateway.dto.EditLocationDTO;
@@ -38,8 +37,10 @@ public class LabelController {
 	
 	public LabelController() {
 		MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
-	    mapperFactory.classMap(LabelDTO.class, Label.class).byDefault();
-	    mapperFactory.classMap(Label.class, LabelDTO.class).byDefault();
+	    mapperFactory.classMap(EditLabelDTO.class, Label.class).byDefault();
+	    mapperFactory.classMap(Label.class, EditLabelDTO.class).byDefault();
+	    mapperFactory.classMap(CreateLabelDTO.class, Label.class).byDefault();
+	    mapperFactory.classMap(Label.class, CreateLabelDTO.class).byDefault();
 	    mapper = mapperFactory.getMapperFacade();
 	}
 	@GetMapping("labels")

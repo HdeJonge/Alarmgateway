@@ -6,7 +6,6 @@ import org.springframework.expression.ParseException;
 import org.springframework.format.Formatter;
 
 import nl.bprocare.alarmgateway.dto.EditLabelDTO;
-import nl.bprocare.alarmgateway.dto.LabelDTO;
 
 public class LabelFormatter implements Formatter<EditLabelDTO> {
 

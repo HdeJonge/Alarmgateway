@@ -41,7 +41,10 @@ public class LocationController {
 		MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
 		mapperFactory.classMap(EditLocationDTO.class, Location.class).byDefault();
 		mapperFactory.classMap(CreateLocationDTO.class, Location.class).byDefault();
+		mapperFactory.classMap(Location.class, CreateLocationDTO.class).byDefault();
 		mapperFactory.classMap(Location.class, EditLocationDTO.class).byDefault();
+		mapperFactory.classMap(Label.class, EditLabelDTO.class).byDefault();
+		mapperFactory.classMap(EditLabelDTO.class, Label.class).byDefault();
 		mapper = mapperFactory.getMapperFacade();
 	}
 
@@ -58,6 +61,15 @@ public class LocationController {
 		List<EditLocationDTO> locations = mapper.mapAsList(locationsDto, EditLocationDTO.class);
 		model.addAttribute("locations", locations);
 		return "private/locations/restlocations";
+	}
+	@GetMapping("dynamicLocations")
+	public String getBasicLocations(Model model) {
+		/* getting */
+		List<Location> locationsDto = locationService.getAllLocations();
+		/* mapping */
+		List<EditLocationDTO> locations = mapper.mapAsList(locationsDto, EditLocationDTO.class);
+		model.addAttribute("locations", locations);
+		return "private/locations/dynamicLocations";
 	}
 
 	@GetMapping("addLocation")

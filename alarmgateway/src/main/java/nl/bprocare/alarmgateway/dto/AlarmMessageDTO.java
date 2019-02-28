@@ -7,13 +7,13 @@ public class AlarmMessageDTO implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String type;
+	private String id;
 	private String message;
-	public String getType() {
-		return type;
+	public String getId() {
+		return id;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getMessage() {
 		return message;
