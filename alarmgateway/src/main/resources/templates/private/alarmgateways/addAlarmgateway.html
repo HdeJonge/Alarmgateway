@@ -13,7 +13,7 @@
 		<div id="content">
 			<!--/*/ <th:block th:include="/fragments/sidebar :: content-fragment"></th:block> /*/-->
 
-			<form action="#" th:action="@{saveGateway}" th:object="${alarmgatewayDTO}" method="post">
+			<form action="#" th:action="@{saveGateway}" th:object="${createAlarmgatewayDTO}" method="post">
 				<div class="form-group">
 					<label>MAC:</label> <input type="text" id="macAddress" class="form-control" th:field="*{mac}"/>
 					<p th:if="${#fields.hasErrors('mac')}" th:errors="*{mac}">Name Error</p>

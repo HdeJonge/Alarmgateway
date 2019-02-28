@@ -38,7 +38,8 @@ public class CreateLocationDTO {
 	@NotNull
 	@NotEmpty
 	private String phoneNumber;
-
+	@NotNull
+	@NotEmpty
 	private List<LabelDTO> labelList;
 
 	public List<LabelDTO> getLabelList() {

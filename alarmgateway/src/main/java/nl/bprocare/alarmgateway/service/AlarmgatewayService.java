@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import nl.bprocare.alarmgateway.dto.AlarmgatewayDTO;
 import nl.bprocare.alarmgateway.pojo.Alarmgateway;
 import nl.bprocare.alarmgateway.repository.AlarmgatewayRepository;
 

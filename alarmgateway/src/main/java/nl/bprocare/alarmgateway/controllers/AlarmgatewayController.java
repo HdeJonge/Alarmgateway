@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
-import nl.bprocare.alarmgateway.dto.AlarmgatewayDTO;
+import nl.bprocare.alarmgateway.dto.CreateAlarmgatewayDTO;
+import nl.bprocare.alarmgateway.dto.EditAlarmgatewayDTO;
 import nl.bprocare.alarmgateway.dto.EditLocationDTO;
 import nl.bprocare.alarmgateway.pojo.Alarmgateway;
 import nl.bprocare.alarmgateway.pojo.Location;
@@ -38,8 +39,8 @@ public class AlarmgatewayController {
 	
 	public AlarmgatewayController() {
 		MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
-	    mapperFactory.classMap(AlarmgatewayDTO.class, Alarmgateway.class).byDefault();
-	    mapperFactory.classMap(Alarmgateway.class, AlarmgatewayDTO.class).byDefault();
+	    mapperFactory.classMap(EditAlarmgatewayDTO.class, Alarmgateway.class).byDefault();
+	    mapperFactory.classMap(Alarmgateway.class, EditAlarmgatewayDTO.class).byDefault();
 	    mapperFactory.classMap(EditLocationDTO.class, Location.class).byDefault();
 	    mapperFactory.classMap(Location.class, EditLocationDTO.class).byDefault();
 	    mapper = mapperFactory.getMapperFacade();
@@ -54,14 +55,14 @@ public class AlarmgatewayController {
 		/*getting*/
 		List<Alarmgateway> alarmgatewaysDto = alarmgatewayService.getAllAlarmgateways();
 		/*mapping*/
-		AlarmgatewayDTO alarmGateways = mapper.map(alarmgatewaysDto, AlarmgatewayDTO.class);
+		EditAlarmgatewayDTO alarmGateways = mapper.map(alarmgatewaysDto, EditAlarmgatewayDTO.class);
 		model.addAttribute("gateways", alarmGateways);
 		return "private/alarmgateways/restgateways";
 	}
 	
 	@GetMapping("addGateway")
 	public String addGateway(Model model) {
-		model.addAttribute("alarmgatewayDTO", new AlarmgatewayDTO());
+		model.addAttribute("createAlarmgatewayDTO", new CreateAlarmgatewayDTO());
 		/*getting*/
 		List<Location> locations = locationService.getAllLocations();
 		/*mapping*/
@@ -70,7 +71,7 @@ public class AlarmgatewayController {
 		return "private/alarmgateways/addAlarmgateway";
 	}
 	@PostMapping("saveGateway")
-	public String saveGateway(@Valid AlarmgatewayDTO alarmgateway, BindingResult result, Model model) {
+	public String saveGateway(@Valid CreateAlarmgatewayDTO alarmgateway, BindingResult result, Model model) {
         if (result.hasErrors()) {
     		List<Location> locations = locationService.getAllLocations();
     		List<EditLocationDTO> locationDTO = mapper.mapAsList(locations, EditLocationDTO.class);
@@ -88,7 +89,7 @@ public class AlarmgatewayController {
 		/*getting*/
 		Alarmgateway alarmgateway = alarmgatewayService.getAlarmgateway(id);
 		/*mapping*/
-		AlarmgatewayDTO alarmgatewayDTO = mapper.map(alarmgateway, AlarmgatewayDTO.class);
+		EditAlarmgatewayDTO alarmgatewayDTO = mapper.map(alarmgateway, EditAlarmgatewayDTO.class);
 		model.addAttribute("alarmgatewayDTO",alarmgatewayDTO);
 		/*getting*/
 		List<Location> locations = locationService.getAllLocations();
@@ -98,7 +99,7 @@ public class AlarmgatewayController {
 		return "private/alarmgateways/editAlarmgateway";
 	}
 	@PostMapping("updateGateway/{id}")
-	public String updateGateway(@PathVariable (value="id")Long id, @Valid AlarmgatewayDTO alarmgatewayDTO, BindingResult result, Model model) {
+	public String updateGateway(@PathVariable (value="id")Long id, @Valid EditAlarmgatewayDTO alarmgatewayDTO, BindingResult result, Model model) {
         if (result.hasErrors()) {
     		List<Location> locations = locationService.getAllLocations();
     		List<EditLocationDTO> locationDTO = mapper.mapAsList(locations, EditLocationDTO.class);

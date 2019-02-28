@@ -1,19 +1,22 @@
 package nl.bprocare.alarmgateway.dto;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import nl.bprocare.alarmgateway.pojo.SettingsProfile;
 
-public class AlarmgatewayDTO {
+public class EditAlarmgatewayDTO {
 
 	private Long id;
+	@NotNull
 	@NotEmpty
 	private String mac;
+	@NotNull
 	private SettingsProfile settingsProfile;
 
 	private EditLocationDTO location;
 	
-	public AlarmgatewayDTO() {
+	public EditAlarmgatewayDTO() {
 		
 	}
 	

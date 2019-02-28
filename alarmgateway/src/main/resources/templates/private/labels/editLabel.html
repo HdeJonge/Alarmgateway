@@ -13,10 +13,11 @@
 		<div id="content">
 			<!--/*/ <th:block th:include="/fragments/sidebar :: content-fragment"></th:block> /*/-->
 			<h1>edit label</h1>
-			<form action="#" th:action="@{/private/updateLabel/{id}(id=${label.id})}" th:object="${label}" method="post">
+			<form action="#" th:action="@{/private/updateLabel/{id}(id=${editLabelDTO.id})}" th:object="${editLabelDTO}"
+				method="post">
 				<div class="form-group">
-					<label>description:</label>
-					<input type="text" class="form-control" th:field="*{description}" required />
+					<label>description:</label> <input type="text" class="form-control" th:field="*{description}" />
+					<p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="alert alert-danger">Name Error</p>
 				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
