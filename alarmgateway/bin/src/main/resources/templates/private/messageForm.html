@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Message</title>
+<!--/*/ <th:block th:include="/fragments/scripts :: head"></th:block> /*/-->
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+		<nav id="sidebar">
+			<!--/*/ <th:block th:include="/fragments/sidebar :: sidebar-fragment"></th:block> /*/-->
+		</nav>
+		<div id="content">
+			<!--/*/ <th:block th:include="/fragments/sidebar :: content-fragment"></th:block> /*/-->
+
+			<form action="#" th:action="@{sendMessage}" th:object="${alarmMessageDTO}" method="post">
+				<div class="form-group">
+					<label>id</label>
+					<input type="text" class="form-control" th:field="*{id}" /> 
+					<label>message</label>
+					<input
+						type="text" class="form-control" th:field="*{message}" />
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

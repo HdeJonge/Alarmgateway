@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Locations</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css"/>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
+<script type="text/javascript" src="/js/jquery.spring-friendly.js"></script> 
+
+</head>
+    <body >
+   
+    <div id="fix-for-navbar-fixed-top-spacing" style="height: 42px;">&nbsp;</div>        
+        <div class="container">
+        
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Bootstrap</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="../../">Home</a></li>
+      <li><a href="../../location">Locaties</a></li>
+      <li><a href="../../alarmGateway">Alarm gateways</a></li>
+    </ul>
+  </div>
+</nav>          
+        
+        
+            <h1 align="center">Alarm gateways</h1>
+            <p><a href='alarmGateway/add' class="btn btn-primary">Alarm gateway toevoegen</a></p>
+            <table id="alarmGateways" class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>mac</th>
+                        <th>settingsProfile</th>
+                        <th>location</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                        <th></th>
+                    </tr>
+                </thead>
+            </table>
+            
+            
+     <div class="text-center">
+            <div th:if="${error}" class="alert-danger row" >
+                <p th:text="${error}"></p>
+
+            </div>
+    </div>  
+            
+            
+        </div>
+
+    <script>
+        $('table#alarmGateways').DataTable({
+            ajax: '/data/alarmGateways',
+            serverSide: true,
+            select: {
+                style: 'single'
+            },
+            columns: [
+                {
+                    data: 'id'
+                },
+                {
+                    data: 'mac'
+                },   
+                {
+                    data: 'settingsprofile'
+                },
+                {
+                    data: 'location.id',
+                    render : function(data, type, row, meta){
+                        return row.location.postalcode + ' '+ row.location.housenumber;
+
+                    }
+                },
+                {
+                    data: 'id',
+                    render : function(data, type, row, meta){
+                        return '<a class="btn btn-default" role="button" href="../../alarmGateway/edit/'+ row.id +'">edit</a>';
+
+                     }
+                },
+                {
+                    data: 'id',
+                    render : function(data, type, row, meta){
+                        return '<a class="btn btn-default" role="button" href="../../alarmGateway/delete/'+ row.id +'">delete</a>';
+
+                     }
+                }
+                              
+            ]
+        });
+        
+        
+    </script>         
+    </body>
+</html>

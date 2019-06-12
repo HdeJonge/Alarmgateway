@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add locations</title>
+<!--/*/ <th:block th:include="/fragments/scripts :: head"></th:block> /*/-->
+<script src="livevalidation_standalone.compressed.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+		<nav id="sidebar">
+			<!--/*/ <th:block th:include="/fragments/sidebar :: sidebar-fragment"></th:block> /*/-->
+		</nav>
+		<div id="content">
+			<!--/*/ <th:block th:include="/fragments/sidebar :: content-fragment"></th:block> /*/-->
+
+			<h1>add location</h1>
+
+			<form action="#" th:action="@{saveLocation}" th:object="${createLocationDTO}" method="post">
+				<div class="form-group">
+					<label>street:</label> <input type="text"
+						th:class="${#fields.hasErrors('street')}? 'form-control is-invalid' : 'form-control'" th:field="*{street}" />
+					<p class="invalid-feedback" th:errors="*{street}">Name Error</p>
+				</div>
+				<div class="form-group">
+					<label>streetnumber:</label> <input type="text"
+						th:class="${#fields.hasErrors('streetNumber')}? 'form-control is-invalid' : 'form-control'"
+						th:field="*{streetNumber}" />
+					<p class="invalid-feedback" th:errors="*{streetNumber}">Name Error</p>
+				</div>
+				<div class="form-group">
+					<label>town</label> <input type="text"
+						th:class="${#fields.hasErrors('town')}? 'form-control is-invalid' : 'form-control'" th:field="*{town}" />
+					<p class="invalid-feedback" th:errors="*{town}">Name Error</p>
+				</div>
+				<div class="form-group">
+					<label>postal code</label> <input type="text"
+						th:class="${#fields.hasErrors('postalCode')}? 'form-control is-invalid' : 'form-control'" th:field="*{postalCode}"
+						pattern="[1-9][0-9]{3}\s?[a-zA-Z]{2}">
+					<p class="invalid-feedback" th:errors="*{postalCode}">Name Error</p>
+				</div>
+				<div class="form-group">
+					<label>phone number</label> <input type="text"
+						th:class="${#fields.hasErrors('phoneNumber')}? 'form-control is-invalid' : 'form-control'"
+						th:field="*{phoneNumber}">
+					<p class="invalid-feedback" th:errors="*{phoneNumber}">Name Error</p>
+				</div>
+				<div class="form-group">
+					<label>label</label>
+					<select th:field="*{labelList}" multiple="multiple" th:class="${#fields.hasErrors('phoneNumber')}? 'form-control multisel  is-invalid ' : 'form-control multisel'">
+						<option 
+						th:each="label:${labelsDTO}"
+						 th:value="${{label}}" 
+						 th:utext="${label.description}">
+					</select>
+					<p class="invalid-feedback" th:errors="*{labelList}">Name Error</p>
+				</div>
+				<p class="invalid-feedback" th:errors="${createLocationDTO}"></p>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+	<script>
+		$(document).ready(function() {
+			$('.multisel').select2();
+		});
+		
+	</script>
+	<style>
+	.focus {
+    border-color: rgba(82, 168, 236, 0.8);
+    outline: 0;
+    outline: thin dotted \9;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),0 0 8px rgba(82, 168, 236, 0.6);
+    -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(82,168,236,0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),0 0 8px rgba(82, 168, 236, 0.6);
+}</style>
+</body>
+</html>

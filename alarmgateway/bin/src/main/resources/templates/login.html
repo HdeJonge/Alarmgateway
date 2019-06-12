@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Login page</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<link href="/css/login.css" th:src="@{/css/login.js}" rel="stylesheet">
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+</style>
+</head>
+<body class="text-center">
+
+	<form class="form-signin" th:action="@{/login}" method="post">
+		<h1 class="h3 mb-3 font-weight-normal">Login page</h1>
+		<p>Example user: user / password</p>
+		<p th:if="${loginError}" class="error">Wrong user or password</p>
+		<label class="sr-only" for="username">Username</label>
+		<input class="form-control" type="text" id="username" name="username" autofocus="autofocus" placeholder="username" />
+		<br /> 
+		<label class="sr-only" for="password">Password</label>
+		<input class="form-control" type="password" id="password" name="password" placeholder="password"/> <br />
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+			<p>
+		<a href="/index" th:href="@{/index}">Back to home page</a>
+	</p>
+	</form>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Add location</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
+   
+</head>
+<body>
+
+<div th:fragment="js">
+    <script th:inline="javascript">
+     $(document).ready(function() {
+         $('.js-label').select2();
+         $('.js-settingsprofile').select2();
+     });
+    </script>
+</div>
+
+<div id="fix-for-navbar-fixed-top-spacing" style="height: 42px;">&nbsp;</div>  
+<div class="container">    
+
+ <nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Bootstrap</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="../../">Home</a></li>
+      <li><a href="../../location">Locaties</a></li>
+      <li><a href="../../alarmGateway">Alarm gateways</a></li>
+    </ul>
+  </div>
+</nav>  
+  
+      
+<div class="row col-md-7 table-responsive">   
+
+
+   
+<table id="locationform" class="table">      
+        
+<form action="#" th:action="@{/addAlarmGateway}" th:object="${alarmGateway}" method="post">
+
+ <thead>
+ <tr>
+ <th class="th-lg"></th>
+ <th class="th-lg"></th>
+ <th class="th-lg"></th>
+ </tr>
+ </thead>
+
+<tbody>
+
+    <tr><td><label for="mac">MAC Adres</label></td>
+    <td><input type="text" th:field="*{mac}" id="mac" placeholder="mac"/></td>
+    <td><span th:if="${#fields.hasErrors('mac')}" th:errors="*{mac}"></span></td></tr>
+    
+    <tr><td><label for="settingsprofile">Settings profiel</label></td>
+    <td>
+<select class="js-settingsprofile" th:field="*{settingsprofile}">
+    <option th:value="'A'" th:text="A"></option>
+    <option th:value="'B'" th:text="B"></option>
+    <option th:value="'C'" th:text="C"></option>    
+</select>
+</td>
+    <td><span th:if="${#fields.hasErrors('settingsprofile')}" th:errors="*{settingsprofile}"></span></td></tr>
+    
+    <tr><td><label for="Location">Locatie</label></td>
+    <td>   
+        
+    <select class="js-label" th:field="*{location}">
+    <option th:each="location : ${locations}" th:value="${location.id}" th:text="${location.id}">
+    </option>
+     </select>
+          
+    </td><td></td></tr>
+    
+    
+    <tr><td><input class="btn btn-primary" type="submit" value="AlarmGateway opslaan"/></td></tr>       
+    
+ </tbody>    
+           
+</form>
+
+ </table>
+ 
+ 
+ 
+ 
+  
+ </div>
+
+</div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+</body>
+</html>

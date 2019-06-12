@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add gateways</title>
+<!--/*/ <th:block th:include="/fragments/scripts :: head"></th:block> /*/-->
+</head>
+<body>
+	<div class="wrapper">
+		<nav id="sidebar">
+			<!--/*/ <th:block th:include="/fragments/sidebar :: sidebar-fragment"></th:block> /*/-->
+		</nav>
+		<div id="content">
+			<!--/*/ <th:block th:include="/fragments/sidebar :: content-fragment"></th:block> /*/-->
+
+			<form action="#" th:action="@{saveGateway}" th:object="${createAlarmgatewayDTO}" method="post">
+				<div class="form-group">
+					<label>MAC:</label> <input type="text" id="macAddress" class="form-control" th:field="*{mac}"/>
+					<p th:if="${#fields.hasErrors('mac')}" th:errors="*{mac}">Name Error</p>
+				</div>
+				<div class="form-group">
+					<label>profile:</label> <select th:field="*{settingsProfile}" class="form-control">
+						<option th:each="profile:${T(nl.bprocare.alarmgateway.pojo.SettingsProfile).values()}" th:value="${profile}"
+							th:utext="${profile}">
+					</select>
+				</div>
+				<div class="form-group">
+					<label>location</label> <select th:field="*{location.id}" class="form-control">
+						<option th:each="location:${locationsDTO}" th:value="${location.id}" th:utext="${location.locationDescription}">
+					</select>
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var macAddress = document.getElementById("macAddress");
+
+		function formatMAC(e) {
+			var r = /([a-f0-9]{2})([a-f0-9]{2})/i, str = e.target.value
+					.replace(/[^a-f0-9]/ig, "");
+
+			while (r.test(str)) {
+				str = str.replace(r, '$1' + ':' + '$2');
+			}
+
+			e.target.value = str.slice(0, 17);
+		};
+
+		macAddress.addEventListener("keyup", formatMAC, false);
+	</script>
+</body>
+</html>
